@@ -21,6 +21,7 @@ function App() {
         <Route path="/" element={<HomePage /> } />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/create" element={<IsPrivate> <CreateGame /> </IsPrivate>} />
+         <Route path="/edit/:gameID" element={<IsPrivate> <EditGame /> </IsPrivate>} />
         <Route path="/games/:gameID" element={ <GameDetails />  } />
         <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />

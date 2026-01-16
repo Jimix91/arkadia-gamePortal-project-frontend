@@ -1,14 +1,9 @@
-
-
-
-
-
 function GameList() {
   
 
   return (
     <>
-      <h1>lISTA DE JUEGOS</h1>
+      <h1>LISTA DE JUEGOS</h1>
     </>
   )
 }
