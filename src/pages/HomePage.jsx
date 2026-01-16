@@ -1,11 +1,11 @@
+import GameList from "../components/GameList"
 
 function HomePage() {
-  
-
   return (
-    <>
-      <h1>Intro</h1>
-    </>
+    <div className="home">
+      <h1 className="home-title">ARKANIA</h1>
+      <GameList />
+    </div>
   )
 }
 
