@@ -1,10 +1,10 @@
-import GameList from './components/GameList'
+import GameList from "../components/gameList"
 
 function HomePage() {
   return (
     <div className="home">
-      <h1 className="home-title">ARKANIA</h1>
-      <GameList />
+      <h1 className="home-title">ARKADIA</h1>
+      <GameList/>
     </div>
   )
 }

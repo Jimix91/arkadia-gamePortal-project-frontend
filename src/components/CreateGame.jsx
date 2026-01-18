@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom"
 
 function CreateGame() {
   
-const {title, setTitle} = useState("")
-const {image, setImage}= useState("")
-const {platforms, setPlatforms} = useState("")
-const {description, setDescription} = useState("")
+const [title, setTitle] = useState("")
+const [image, setImage]= useState("")
+const [platforms, setPlatforms] = useState("")
+const [description, setDescription] = useState("")
 
 const navigate = useNavigate()
 
@@ -24,9 +24,9 @@ const navigate = useNavigate()
     }
 
     axios
-      .post(`${API_URL}/games`, newGame)
+      .post(`${API_URL}/api/games`, newGame)
       .then(() => {
-        navigate("/games")
+        navigate("/api/games")
           .catch((err) => {
             console.log("Something went wrong adding your game", err)
           })
@@ -70,7 +70,7 @@ const navigate = useNavigate()
         />
 
       </form>
-      <button className="form-button" type="submit">
+      <button type="submit">
           Save Game
         </button>
     </>

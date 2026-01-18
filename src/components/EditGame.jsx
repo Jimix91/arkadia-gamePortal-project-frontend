@@ -1,5 +1,5 @@
 
-function editGame() {
+function EditGame() {
   
 
   return (
@@ -9,4 +9,4 @@ function editGame() {
   )
 }
 
-export default editGame
+export default EditGame
