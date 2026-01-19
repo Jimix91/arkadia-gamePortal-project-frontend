@@ -23,16 +23,16 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
 
         
-        <Route path="/create" element={<IsPrivate><CreateGame /></IsPrivate>}/>
+        <Route path="/games/create" element={<IsPrivate><CreateGame /></IsPrivate>}/>
 
         
-        <Route path="/api/games" element={<GameList />} />
+        <Route path="/games" element={<GameList />} />
 
       
-        <Route path="/api/games/:gameId" element={<GameDetails />} />
+        <Route path="/games/:gameId" element={<GameDetails />} />
 
       
-        <Route path="/edit/:gameId" element={ <IsPrivate> <EditGame />  </IsPrivate>  }/>
+        <Route path="/games/edit/:gameId" element={ <IsPrivate> <EditGame />  </IsPrivate>  }/>
 
         <Route  path="/signup" element={   <IsAnon> <SignupPage /> </IsAnon> } />
 

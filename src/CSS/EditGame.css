@@ -1,0 +1,124 @@
+.edit-game {
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.edit-game-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.edit-game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.edit-form-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.edit-form-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.form-input.dropdown-container {
+  width: 225px;
+  padding-left: 0;
+}
+
+.edit-form-button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.edit-form-button:hover {
+  background-color: #45a049;
+}
+
+.edit-form-button.cancel {
+  background-color: #f44336;
+}
+
+.edit-form-button.cancel:hover {
+  background-color: #da190b;
+}
+
+.edit-game-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-game-actions button {
+  flex: 1;
+}
+
+/* Reuse dropdown styles from CreateGame */
+.dropdown-container {
+  position: relative;
+  cursor: pointer;
+  width: 225px;
+  padding-left: 0;
+}
+
+.dropdown-header {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 34px;
+  background-color: #fff;
+}
+
+.dropdown-arrow {
+  margin-left: 8px;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.dropdown-option {
+  padding: 8px;
+}
+
+.dropdown-option:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-option.selected {
+  background-color: #e0f7fa;
+}

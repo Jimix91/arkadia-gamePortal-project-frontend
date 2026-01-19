@@ -17,10 +17,13 @@ function Navbar() {
       
       {isLoggedIn && (
         <>
-          <Link to="/api/games">
+          <Link to="/games">
             <button>Games</button>
           </Link>
-        
+
+          <Link to="/games/create">
+            <button>Create</button>
+          </Link>
          
           <button onClick={logOutUser}>Logout</button>
           <span>{user && user.name}</span>

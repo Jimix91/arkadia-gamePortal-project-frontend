@@ -1,80 +1,111 @@
-import { useEffect, useState } from "react"
-import { API_URL } from "../context/auth.context"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getPlatforms, createGame } from "../services/games.service";
+import "../CSS/CreateGame.css"
+
 
 function CreateGame() {
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [platforms, setPlatforms] = useState([]);
+  const [description, setDescription] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [platformOptions, setPlatformOptions] = useState([]);
+
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const fetchPlatforms = async () => {
+      try {
+        const platforms = await getPlatforms();
+        setPlatformOptions(platforms);
+      } catch (err) {
+        console.error("Error fetching platforms", err);
+      }
+    };
+    fetchPlatforms();
+  }, []);
+
   
-const [title, setTitle] = useState("")
-const [image, setImage]= useState("")
-const [platforms, setPlatforms] = useState("")
-const [description, setDescription] = useState("")
+  const handlePlatformToggle = (plat) => {
+    if (platforms.includes(plat)) {
+      setPlatforms(platforms.filter((p) => p !== plat));
+    } else {
+      setPlatforms([...platforms, plat]);
+    }
+  };
 
-const navigate = useNavigate()
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newGame = {
+    const newGame = { title, image, platforms, description };
+    const storedToken = localStorage.getItem("authToken");
 
-      title: title,
-      image: image,
-      platforms: platforms,
-      description: description,
-
-    }
-
-    axios
-      .post(`${API_URL}/api/games`, newGame)
-      .then(() => {
-        navigate("/api/games")
-          .catch((err) => {
-            console.log("Something went wrong adding your game", err)
-          })
-
-      })
-
-}
+    createGame(newGame, storedToken)
+      .then(() => navigate("/"))
+      .catch((err) =>
+        console.log("Something went wrong adding your game", err)
+      );
+  };
 
   return (
-    <>
-      <form action={handleSubmit}>
-        <label>Title</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="e.g Super Mario"
-          required
-        />
-        <label>Image</label>
-        <input
-          type="url"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          placeholder="https://....."
-        />
-        <label>Platforms</label>
-        <input
-          type="text"
-          value={platforms}
-          onChange={(e) => setPlatforms(e.target.value)}
-          placeholder="PC, XBOX, PS5,..."
-          required
-        />
-        <label>Description</label>
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="This game is about...."
-        />
+    <form onSubmit={handleSubmit} className="create-game-form">
+      <label>Title</label>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="e.g Super Mario"
+        required
+      />
 
-      </form>
-      <button type="submit">
-          Save Game
-        </button>
-    </>
-  )
+      <label>Image</label>
+      <input
+        type="url"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+        placeholder="https://....."
+      />
+
+      <label>Platforms</label>
+      <div className="dropdown-container form-input">
+        <div
+          className="dropdown-header"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          {platforms.length > 0 ? platforms.join(", ") : "Select platforms"}
+          <span className="dropdown-arrow">▼</span>
+        </div>
+
+        {dropdownOpen && (
+          <div className="dropdown-options">
+            {platformOptions.map((plat) => (
+              <div
+                key={plat}
+                onClick={() => handlePlatformToggle(plat)}
+                className={`dropdown-option ${platforms.includes(plat) ? "selected" : ""
+                  }`}
+              >
+                {plat} {platforms.includes(plat) ? "✔" : ""}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <label>Description</label>
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="This game is about...."
+      />
+
+      <button type="submit">Save Game</button>
+    </form>
+  );
 }
 
-export default CreateGame
+export default CreateGame;
