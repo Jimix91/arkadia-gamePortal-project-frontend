@@ -24,8 +24,9 @@ function GameList() {
           {game.image && (
             <img src={game.image} alt={game.title} />
           )}
-
           <p>{game.platforms.map((element)=> <span key={element} className="badge">{element}</span>)}</p>
+
+          <p>{game.averageRating}</p>
 
           <NavLink to={`/games/${game._id}`}>
             See Details

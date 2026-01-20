@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate, NavLink } from "react-router-dom"
+import { useContext } from "react"
+import { AuthContext } from "../context/auth.context"
 import { getGameById, deleteGame } from "../services/games.service"
+import { getReviewsByGameId } from "../services/review.service"
 import "../CSS/GameDetails.css"
+import ReviewList from "../components/ReviewList"
+import CreateReview from "../components/CreateReview"
 
 function GameDetails() {
   const { gameId } = useParams()
   const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
   const [game, setGame] = useState(null)
+  const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(null)
+  const [refreshKey, setRefreshKey] = useState(0)
 
   useEffect(() => {
     setLoading(true)
@@ -22,6 +30,7 @@ function GameDetails() {
         setLoading(false)
       })
   }, [gameId])
+
 
   if (loading) {
     return <p>Loading game...</p>
@@ -51,9 +60,11 @@ function GameDetails() {
     }
   }
 
-  const isOwner = localStorage.getItem("authToken") 
+  const isLoggedIn = !!user
 
-
+  const handleReviewCreated = () => {
+    setRefreshKey(prev => prev + 1)
+  }
 
   return (
     <div className="game-details">
@@ -66,7 +77,7 @@ function GameDetails() {
       <p><strong>Platforms:</strong> {game.platforms.map((element)=> <span key={element} className="badge">{element}</span>)}</p>
       <p><strong>Description:</strong> {game.description}</p>
 
-      {isOwner && (
+      {isLoggedIn && (
         <div className="game-actions">
           <NavLink to={`/games/edit/${gameId}`}><button className="edit-button">
             ✏️ Edit Game
@@ -76,7 +87,17 @@ function GameDetails() {
           </button>
         </div>
       )}
+
+      <div className="reviews-section">
+        <h4>Reviews</h4>
+        <CreateReview gameId={gameId} onReviewCreated={handleReviewCreated} />
+
+        <ReviewList key={refreshKey} gameId={gameId} />
+      </div>
+
     </div>
+
+    
   )
 
   
