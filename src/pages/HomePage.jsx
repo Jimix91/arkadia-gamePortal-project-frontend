@@ -1,4 +1,4 @@
-import GameList from "../components/GameList_temp"
+import GameList from "../components/GameList"
 
 function HomePage() {
   return (
