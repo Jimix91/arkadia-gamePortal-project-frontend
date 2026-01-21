@@ -1,4 +1,5 @@
 import GameList from "../components/GameList"
+import "../CSS/HomePage.css"
 
 function HomePage() {
   return (

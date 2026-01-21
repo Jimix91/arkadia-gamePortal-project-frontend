@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getGameById, updateGame, getPlatforms } from "../services/games.service";
-import "../CSS/EditGame.css";
+import "../index.css";
 
 function EditGame() {
   const { gameId } = useParams();
