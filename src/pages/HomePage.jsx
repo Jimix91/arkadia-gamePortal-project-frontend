@@ -5,9 +5,10 @@ function HomePage() {
   return (
     <div className="home-page">
       <header className="home-header">
-        <p className="home-intro">
-          Game Portal - Discover and review your favorite games!
-        </p>
+        <h2 className="home-intro">
+          GAME PORTAL  
+        </h2>
+        <p className="home-intro">Discover and review your favorite games!</p>
         <hr className="home-separator" />
       </header>
 

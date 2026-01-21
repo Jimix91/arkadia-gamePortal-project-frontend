@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 import { getReviewsByGameId, deleteReview, updateReview } from "../services/review.service"
 import { AuthContext } from "../context/auth.context"
+import "../CSS/ReviewList.css"
 
 function ReviewList({ gameId }) {
   const [reviews, setReviews] = useState([])
@@ -101,20 +102,27 @@ function ReviewList({ gameId }) {
             </div>
           ) : (
             <>
-              <h3>{review.content}</h3>
-              <p><strong>Rating:</strong> {review.rating}/10</p>
-              <p><strong>Author:</strong> {review.author.name}</p>
-
-              {isOwner(review) && (
-                <div className="review-actions">
-                  <button onClick={() => handleEditClick(review)} className="edit-button">
-                    ✏️ Edit
-                  </button>
-                  <button onClick={() => handleDelete(review._id)} className="delete-button">
-                    🗑️ Delete
-                  </button>
+              <div className="review-card">
+                <div className="review-header">
+                  <span className="review-author">{review.author.name}</span>
+                  <span className="review-date">{new Date(review.createdAt).toLocaleDateString()}</span>
                 </div>
-              )}
+
+                <div className="rating-stars">
+                  {[...Array(10)].map((_, i) => (
+                    <span key={i} className={i < review.rating ? "star filled" : "star"}>★</span>
+                  ))}
+                </div>
+
+                <div className="review-content">{review.content}</div>
+
+                {isOwner(review) && (
+                  <div className="review-actions">
+                    <button onClick={() => handleEditClick(review)} className="edit-button">✏️ Edit</button>
+                    <button onClick={() => handleDelete(review._id)} className="delete-button">🗑️ Delete</button>
+                  </div>
+                )}
+              </div>
             </>
           )}
         </div>

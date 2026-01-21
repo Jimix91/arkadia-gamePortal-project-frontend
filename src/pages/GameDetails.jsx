@@ -42,7 +42,7 @@ function GameDetails() {
 
   const handleDelete = () => {
     const storedToken = localStorage.getItem("authToken")
-    
+
     if (!storedToken) {
       console.log("You need to be logged in to delete a game")
       return
@@ -74,9 +74,36 @@ function GameDetails() {
           <img src={game.image} alt={game.title} />
         )}
 
-        <p><strong>Platforms:</strong> {game.platforms.map((element) => <span key={element} className="badge">{element}</span>)}</p>
-        <p><strong>Description:</strong> {game.description}</p>
+        <p>
+          <strong>Platforms:</strong>{" "}
+          {game.platforms.map((plat) => (
+            <span key={plat} className="badge">{plat}</span>
+          ))}
+        </p>
+        <p>
+          <strong>Developer:</strong> {game.developer || "Unknown"}
+        </p>
 
+        <p>
+          <strong>Year:</strong> {game.year || "Unknown"}
+        </p>
+        <div>
+          {game.averageRating ? (
+            <span className="rating-stars">
+              {[...Array(10)].map((_, i) => (
+                <span
+                  key={i}
+                  className={i < game.averageRating ? "star filled" : "star"}
+                >
+                  ★
+                </span>
+              ))}
+            </span>
+          ) : (
+            "No ratings yet"
+          )}
+        </div>
+        <p><strong>Description:</strong> {game.description}</p>
         {isLoggedIn && (
           <div className="game-actions">
             <NavLink to={`/games/edit/${gameId}`}><button className="edit-button">
@@ -89,7 +116,7 @@ function GameDetails() {
         )}
 
         <div className="reviews-section">
-          <h4>Reviews</h4>
+
           <CreateReview gameId={gameId} onReviewCreated={handleReviewCreated} />
 
           <ReviewList key={refreshKey} gameId={gameId} />

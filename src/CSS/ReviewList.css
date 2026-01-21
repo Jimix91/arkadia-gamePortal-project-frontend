@@ -1,0 +1,182 @@
+/* Contenedor principal de la lista */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* más espacio entre cada review */
+  margin-top: 24px;
+}
+
+/* Card individual */
+.review-card {
+  background-color: #1f2040;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow:
+    0 0 14px rgba(79,209,255,0.2),
+    0 0 14px rgba(255,79,216,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 22px rgba(79,209,255,0.5),
+    0 0 22px rgba(255,79,216,0.4);
+}
+
+/* Header de review (autor + fecha) */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* que no se pegue el texto */
+  margin-bottom: 12px;
+}
+
+.review-author {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.review-date {
+  font-size: 0.85rem;
+  color: #dfe4ff;
+  opacity: 0.7;
+  margin-left: 12px; /* separación del autor */
+}
+
+/* Rating visual */
+.rating-stars {
+  margin: 10px 0; /* separa rating del contenido */
+}
+
+.star {
+  font-size: 1.3rem; /* un poco más grande */
+  margin-right: 3px;
+  color: rgba(255,255,255,0.2);
+}
+
+.star.filled {
+  color: #ffd84f;
+  text-shadow:
+    0 0 6px rgba(255,216,79,0.8),
+    0 0 10px rgba(255,216,79,0.6);
+}
+
+/* Contenido de review */
+.review-content {
+  font-size: 0.95rem;
+  line-height: 1.8; /* más espaciado */
+  color: #dfe4ff;
+  margin-bottom: 16px; /* separa del rating/botones */
+}
+
+/* Botones de acción */
+.review-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Botones Edit / Save */
+.edit-button, .save-button {
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.edit-button:hover, .save-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 16px rgba(79,209,255,0.8),
+    0 0 16px rgba(255,79,216,0.8);
+}
+
+/* Botones Delete / Cancel */
+.delete-button, .cancel-button {
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255,107,107,0.3);
+  transition: all 0.25s ease;
+}
+
+.delete-button:hover, .cancel-button:hover {
+  background-color: rgba(255,107,107,0.15);
+  box-shadow: 0 0 16px rgba(255,107,107,0.6);
+}
+
+/* Edit form */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-form textarea {
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  resize: vertical;
+  min-height: 80px;
+  background-color: #26263a;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.edit-form input[type="number"] {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: none;
+  width: 80px;
+  background-color: #26263a;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+/* 🔹 Botón Create Review */
+.create-review-button {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+
+  color: #fff;
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  box-shadow:
+    0 0 12px rgba(79,209,255,0.5),
+    0 0 12px rgba(255,79,216,0.5);
+
+  transition: all 0.25s ease;
+}
+
+.create-review-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 18px rgba(79,209,255,0.8),
+    0 0 18px rgba(255,79,216,0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .review-actions {
+    flex-direction: column;
+  }
+}
