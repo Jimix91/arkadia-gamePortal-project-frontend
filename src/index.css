@@ -1,0 +1,39 @@
+/* Reset de márgenes y paddings del navegador */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Contenedor raíz de React */
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Fondo global */
+body {
+  background: radial-gradient(
+    circle at top,
+    rgba(79, 209, 255, 0.15),
+    #0f1020
+  );
+  color: #ffffff;
+  min-height: 100vh;
+  width: 100vw;
+  background-attachment: fixed; /* Para que el fondo no se mueva al hacer scroll */
+}
+
+/* Si quieres, un overlay suave para que el contenido resalte más */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* ajuste la intensidad si quieres */
+  z-index: -1;
+}

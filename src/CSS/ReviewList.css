@@ -1,145 +1,164 @@
-/* Contenedor principal de la lista */
-.review-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px; /* más espacio entre cada review */
-  margin-top: 24px;
-}
-
-/* Card individual */
 .review-card {
-  background-color: #1f2040;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow:
-    0 0 14px rgba(79,209,255,0.2),
-    0 0 14px rgba(255,79,216,0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #1f202e; /* tono oscuro elegante */
+  color: #fff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .review-card:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 0 22px rgba(79,209,255,0.5),
-    0 0 22px rgba(255,79,216,0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Header de review (autor + fecha) */
+/* Header con autor y fecha */
 .review-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline; /* que no se pegue el texto */
+  align-items: center;
   margin-bottom: 12px;
 }
 
 .review-author {
   font-weight: 600;
-  color: #ffffff;
+  font-size: 1rem;
+  color: #4fd1ff;
 }
 
 .review-date {
   font-size: 0.85rem;
-  color: #dfe4ff;
-  opacity: 0.7;
-  margin-left: 12px; /* separación del autor */
+  color: #bbb;
 }
 
-/* Rating visual */
+/* Rating estilo Metacritic */
+.rating-container {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.rating-number {
+  font-weight: 700;
+  font-size: 2.1rem;
+  margin-bottom: 6px;
+  color: #ffcc00;
+  text-align: center;
+}
+
 .rating-stars {
-  margin: 10px 0; /* separa rating del contenido */
+  display: flex;
+  justify-content: center;
+  gap: 6px;
 }
 
 .star {
-  font-size: 1.3rem; /* un poco más grande */
-  margin-right: 3px;
-  color: rgba(255,255,255,0.2);
+  font-size: 1.6rem;
+  color: #555;
+  transition: color 0.2s;
 }
 
 .star.filled {
-  color: #ffd84f;
-  text-shadow:
-    0 0 6px rgba(255,216,79,0.8),
-    0 0 10px rgba(255,216,79,0.6);
+  color: #ffcc00;
 }
 
-/* Contenido de review */
+/* Contenido de la review */
 .review-content {
   font-size: 0.95rem;
-  line-height: 1.8; /* más espaciado */
-  color: #dfe4ff;
-  margin-bottom: 16px; /* separa del rating/botones */
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: #e0e0e0;
+  margin-top: 20px;
+  
 }
 
-/* Botones de acción */
+/* Acciones de edición/eliminación */
 .review-actions {
   display: flex;
   gap: 10px;
-  margin-top: 12px;
+  justify-content: flex-end;
 }
 
-/* Botones Edit / Save */
-.edit-button, .save-button {
-  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
-  color: #fff;
+.edit-button,
+.delete-button,
+.save-button,
+.cancel-button {
+  padding: 6px 12px;
   border: none;
-  border-radius: 10px;
-  padding: 6px 14px;
-  font-weight: 600;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  font-size: 0.85rem;
+  transition: background 0.2s;
 }
 
-.edit-button:hover, .save-button:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 16px rgba(79,209,255,0.8),
-    0 0 16px rgba(255,79,216,0.8);
+.edit-button {
+  background-color: #4fd1ff;
+  color: #000;
 }
 
-/* Botones Delete / Cancel */
-.delete-button, .cancel-button {
-  background: transparent;
-  color: #ff6b6b;
-  border: 1px solid #ff6b6b;
-  border-radius: 10px;
-  padding: 6px 14px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(255,107,107,0.3);
-  transition: all 0.25s ease;
+.edit-button:hover {
+  background-color: #3bb0e0;
 }
 
-.delete-button:hover, .cancel-button:hover {
-  background-color: rgba(255,107,107,0.15);
-  box-shadow: 0 0 16px rgba(255,107,107,0.6);
+.delete-button {
+  background-color: #ff4d4d;
+  color: #fff;
 }
 
-/* Edit form */
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.delete-button:hover {
+  background-color: #e04343;
 }
 
+.save-button {
+  background-color: #4fd1ff;
+  color: #000;
+}
+
+.save-button:hover {
+  background-color: #3bb0e0;
+}
+
+.cancel-button {
+  background-color: #777;
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background-color: #5c5c5c;
+}
+
+/* Formulario de edición */
 .edit-form textarea {
+  width: 100%;
+  min-height: 70px;
+  margin-bottom: 10px;
   padding: 10px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: none;
   resize: vertical;
-  min-height: 80px;
-  background-color: #26263a;
-  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+  background-color: #2a2b3e;
+  color: #fff;
+}
+
+.edit-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
   font-size: 0.95rem;
 }
 
-.edit-form input[type="number"] {
-  padding: 6px 10px;
-  border-radius: 10px;
+.edit-rating input {
+  width: 60px;
+  padding: 5px;
+  border-radius: 6px;
   border: none;
-  width: 80px;
-  background-color: #26263a;
-  color: #ffffff;
-  font-size: 0.9rem;
+  text-align: center;
+  font-size: 0.95rem;
+  background-color: #2a2b3e;
+  color: #fff;
 }
 
 /* 🔹 Botón Create Review */
@@ -168,6 +187,7 @@
     0 0 18px rgba(79,209,255,0.8),
     0 0 18px rgba(255,79,216,0.8);
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {

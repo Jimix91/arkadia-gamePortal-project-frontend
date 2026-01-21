@@ -2,10 +2,12 @@ import { useState, useContext } from "react"
 import { createReview } from "../services/review.service"
 import { AuthContext } from "../context/auth.context"
 import { Link } from "react-router-dom"
+import "../CSS/CreateReview.css"
 
 function CreateReview({ gameId, onReviewCreated }) {
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({ content: "", rating: 5 })
+  const [hoverRating, setHoverRating] = useState(0) // hover dinámico
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const { user } = useContext(AuthContext)
@@ -14,8 +16,12 @@ function CreateReview({ gameId, onReviewCreated }) {
     const { name, value } = e.target
     setFormData({
       ...formData,
-      [name]: name === "rating" ? Number(value) : value,
+      [name]: value,
     })
+  }
+
+  const handleStarClick = (star) => {
+    setFormData({ ...formData, rating: star })
   }
 
   const handleSubmit = (e) => {
@@ -40,6 +46,7 @@ function CreateReview({ gameId, onReviewCreated }) {
     createReview(gameId, formData, storedToken)
       .then(() => {
         setFormData({ content: "", rating: 5 })
+        setHoverRating(0)
         setShowForm(false)
         onReviewCreated()
       })
@@ -55,20 +62,17 @@ function CreateReview({ gameId, onReviewCreated }) {
   const handleCancel = () => {
     setShowForm(false)
     setFormData({ content: "", rating: 5 })
+    setHoverRating(0)
     setError(null)
   }
 
-    if (!user) {
-        return (
-            <Link to="/login">
-                <button
-                    className="create-review-button"
-                >
-                    ⭐ Create Review
-                </button>
-            </Link>
-        )
-    }
+  if (!user) {
+    return (
+      <Link to="/login">
+        <button className="create-review-button">⭐ Create Review</button>
+      </Link>
+    )
+  }
 
   return (
     <div className="create-review-container">
@@ -99,19 +103,21 @@ function CreateReview({ gameId, onReviewCreated }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="rating">Rating:</label>
-            <select
-              id="rating"
-              name="rating"
-              value={formData.rating}
-              onChange={handleInputChange}
-            >
-              <option value={1}>1 - Poor</option>
-              <option value={2}>2 - Fair</option>
-              <option value={3}>3 - Good</option>
-              <option value={4}>4 - Very Good</option>
-              <option value={5}>5 - Excellent</option>
-            </select>
+            <label>Rating:</label>
+            <div className="star-rating">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`star ${star <= (hoverRating || formData.rating) ? "filled" : ""}`}
+                  onClick={() => handleStarClick(star)}
+                  onMouseEnter={() => setHoverRating(star)}
+                  onMouseLeave={() => setHoverRating(0)}
+                >
+                  ★
+                </span>
+              ))}
+              <span className="rating-number">{formData.rating} / 5</span>
+            </div>
           </div>
 
           <div className="form-actions">

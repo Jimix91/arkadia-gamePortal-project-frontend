@@ -8,6 +8,8 @@ function ReviewList({ gameId }) {
   const [editingId, setEditingId] = useState(null)
   const [editData, setEditData] = useState({ content: "", rating: 0 })
   const { user } = useContext(AuthContext)
+  const [hoverEditRating, setHoverEditRating] = useState(0)
+
 
   useEffect(() => {
     loadReviews()
@@ -79,37 +81,49 @@ function ReviewList({ gameId }) {
     <>
       {reviews.map((review) => (
         <div key={review._id} className="review-card">
-          {editingId === review._id ? (
-            <div className="edit-form">
-              <textarea
-                value={editData.content}
-                onChange={(e) => setEditData({ ...editData, content: e.target.value })}
-                placeholder="Edit your review"
-              />
-              <input
-                type="number"
-                min="1"
-                max="10"
-                value={editData.rating}
-                onChange={(e) => setEditData({ ...editData, rating: Number(e.target.value) })}
-              />
-              <button onClick={() => handleEditSave(review._id)} className="save-button">
-                Save
-              </button>
-              <button onClick={handleEditCancel} className="cancel-button">
-                Cancel
-              </button>
-            </div>
-          ) : (
+         {editingId === review._id ? (
+  <div className="edit-form">
+    <textarea
+      value={editData.content}
+      onChange={(e) => setEditData({ ...editData, content: e.target.value })}
+      placeholder="Edit your review"
+    />
+
+    <div className="edit-rating">
+      <label>Rating:</label>
+      <div className="star-rating">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            className={`star ${star <= (hoverEditRating || editData.rating) ? "filled" : ""}`}
+            onClick={() => setEditData({ ...editData, rating: star })}
+            onMouseEnter={() => setHoverEditRating(star)}
+            onMouseLeave={() => setHoverEditRating(0)}
+          >
+            ★
+          </span>
+        ))}
+        <span className="rating-number">{editData.rating} / 5</span>
+      </div>
+    </div>
+
+    <button onClick={() => handleEditSave(review._id)} className="save-button">
+      Save
+    </button>
+    <button onClick={handleEditCancel} className="cancel-button">
+      Cancel
+    </button>
+  </div>
+) : (
             <>
               <div className="review-card">
                 <div className="review-header">
                   <span className="review-author">{review.author.name}</span>
                   <span className="review-date">{new Date(review.createdAt).toLocaleDateString()}</span>
                 </div>
-
+                 <div className="rating-number">{review.rating}</div>
                 <div className="rating-stars">
-                  {[...Array(10)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <span key={i} className={i < review.rating ? "star filled" : "star"}>★</span>
                   ))}
                 </div>
