@@ -24,7 +24,19 @@ function GameList() {
                 <span key={plat} className="badge">{plat}</span>
               ))}
             </div>
-            <p className="rating">{game.averageRating ? `⭐ ${game.averageRating}` : "No ratings yet"}</p>
+            <div className="rating">
+              {game.averageRating
+                ? [...Array(10)].map((_, i) => (
+                  <span
+                    key={i}
+                    className={i < game.averageRating ? "star filled" : "star"}
+                  >
+                    ★
+                  </span>
+                ))
+                : <span className="no-rating">No ratings yet</span>
+              }
+            </div>
             <NavLink to={`/games/${game._id}`}>See Details</NavLink>
           </div>
         </div>

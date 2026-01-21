@@ -1,0 +1,146 @@
+/* Background de página (MISMO que HomePage) */
+.game-details-page {
+  min-height: calc(100vh - 64px);
+  background: radial-gradient(
+    circle at top,
+    rgba(79, 209, 255, 0.15),
+    #0f1020
+  );
+  padding: 40px 0;
+}
+
+/* Card */
+.game-details {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+
+  background-color: #1f2040;
+  border-radius: 20px;
+  color: #ffffff;
+
+  box-shadow:
+    0 0 20px rgba(79,209,255,0.25),
+    0 0 20px rgba(255,79,216,0.2);
+}
+
+/* Title */
+.game-details h3 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Image */
+.game-details img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 24px;
+}
+
+/* Text blocks */
+.game-details p {
+  margin-bottom: 14px;
+  line-height: 1.6;
+  color: #dfe4ff;
+}
+
+.game-details strong {
+  color: #ffffff;
+}
+
+/* Platforms badges (reusa badge existente) */
+.game-details .badge {
+  margin-left: 6px;
+}
+
+/* Actions */
+.game-actions {
+  display: flex;
+  gap: 14px;
+  margin: 28px 0;
+}
+
+/* Edit button */
+.edit-button {
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow:
+    0 0 10px rgba(79,209,255,0.4),
+    0 0 10px rgba(255,79,216,0.4);
+
+  transition: all 0.25s ease;
+}
+
+.edit-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 18px rgba(79,209,255,0.8),
+    0 0 18px rgba(255,79,216,0.8);
+}
+
+/* Delete button */
+.delete-button {
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow: 0 0 10px rgba(255,107,107,0.4);
+  transition: all 0.25s ease;
+}
+
+.delete-button:hover {
+  background-color: rgba(255,107,107,0.15);
+  box-shadow: 0 0 16px rgba(255,107,107,0.8);
+}
+
+/* Reviews section */
+.reviews-section {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.reviews-section h4 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Loading / empty states */
+.game-details > p {
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .game-details {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .game-details h3 {
+    font-size: 1.8rem;
+  }
+
+  .game-actions {
+    flex-direction: column;
+  }
+}

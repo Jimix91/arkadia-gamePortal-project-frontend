@@ -3,9 +3,17 @@ import "../CSS/HomePage.css"
 
 function HomePage() {
   return (
-    <div className="home">
-      <h1 className="home-title">ARKADIA</h1>
-      <GameList/>
+    <div className="home-page">
+      <header className="home-header">
+        <p className="home-intro">
+          Game Portal - Discover and review your favorite games!
+        </p>
+        <hr className="home-separator" />
+      </header>
+
+      <main>
+        <GameList />
+      </main>
     </div>
   )
 }

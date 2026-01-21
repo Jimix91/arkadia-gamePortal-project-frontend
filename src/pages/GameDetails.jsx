@@ -3,7 +3,7 @@ import { useParams, useNavigate, NavLink } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "../context/auth.context"
 import { getGameById, deleteGame } from "../services/games.service"
-import "../index.css"
+import "../CSS/GameDetails.css"
 import ReviewList from "../components/ReviewList"
 import CreateReview from "../components/CreateReview"
 
@@ -66,40 +66,41 @@ function GameDetails() {
   }
 
   return (
-    <div className="game-details">
-      <h3>{game.title}</h3>
+    <div className="game-details-page">
+      <div className="game-details">
+        <h3>{game.title}</h3>
 
-      {game.image && (
-        <img src={game.image} alt={game.title} />
-      )}
+        {game.image && (
+          <img src={game.image} alt={game.title} />
+        )}
 
-      <p><strong>Platforms:</strong> {game.platforms.map((element)=> <span key={element} className="badge">{element}</span>)}</p>
-      <p><strong>Description:</strong> {game.description}</p>
+        <p><strong>Platforms:</strong> {game.platforms.map((element) => <span key={element} className="badge">{element}</span>)}</p>
+        <p><strong>Description:</strong> {game.description}</p>
 
-      {isLoggedIn && (
-        <div className="game-actions">
-          <NavLink to={`/games/edit/${gameId}`}><button className="edit-button">
-            ✏️ Edit Game
-          </button></NavLink>
-          <button onClick={handleDelete} className="delete-button">
-            🗑️ Delete Game
-          </button>
+        {isLoggedIn && (
+          <div className="game-actions">
+            <NavLink to={`/games/edit/${gameId}`}><button className="edit-button">
+              ✏️ Edit Game
+            </button></NavLink>
+            <button onClick={handleDelete} className="delete-button">
+              🗑️ Delete Game
+            </button>
+          </div>
+        )}
+
+        <div className="reviews-section">
+          <h4>Reviews</h4>
+          <CreateReview gameId={gameId} onReviewCreated={handleReviewCreated} />
+
+          <ReviewList key={refreshKey} gameId={gameId} />
         </div>
-      )}
-
-      <div className="reviews-section">
-        <h4>Reviews</h4>
-        <CreateReview gameId={gameId} onReviewCreated={handleReviewCreated} />
-
-        <ReviewList key={refreshKey} gameId={gameId} />
       </div>
-
     </div>
 
-    
+
   )
 
-  
+
 }
 
 export default GameDetails
