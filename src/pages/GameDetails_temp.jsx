@@ -6,7 +6,7 @@ import { getGameById, deleteGame } from "../services/games.service"
 import { getReviewsByGameId } from "../services/review.service"
 import "../CSS/GameDetails.css"
 import ReviewList from "../components/ReviewList"
-import CreateReview from "../components/CreateReview"
+import CreateReview from "../components/CreateReview_temp"
 
 function GameDetails() {
   const { gameId } = useParams()
