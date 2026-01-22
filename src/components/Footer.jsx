@@ -17,6 +17,11 @@ function Footer() {
           <Link to="/games/create">Crear juego</Link>
           <Link to="/signup">Crear cuenta</Link>
         </div>
+
+        <div className="footer__social">
+          <a href="https://github.com/Jimix91" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/joan-jim%C3%A9nez-camps-4084a8226/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
       </div>
 
       <div className="footer__bottom">

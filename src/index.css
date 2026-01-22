@@ -15,12 +15,8 @@ html, body {
 
 /* Fondo global */
 body {
-  background: radial-gradient(
-    circle at top,
-    rgba(79, 209, 255, 0.15),
-    #0f1020
-  );
-  color: #ffffff;
+  background: #0f172a;
+  color: #e5edff;
   min-height: 100vh;
   width: 100vw;
   background-attachment: fixed; /* Para que el fondo no se mueva al hacer scroll */
@@ -34,6 +30,6 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1); /* ajuste la intensidad si quieres */
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(15,23,42,0.35));
   z-index: -1;
 }

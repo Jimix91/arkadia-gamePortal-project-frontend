@@ -7,8 +7,6 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 juegos por fila */
   gap: 28px;
-
-  background-color: #0f1020;
 }
 
 /* Filtro activo */

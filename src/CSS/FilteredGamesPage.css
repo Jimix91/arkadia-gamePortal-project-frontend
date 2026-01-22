@@ -1,6 +1,6 @@
 .filtered-games-page {
   min-height: 100vh;
-  background: radial-gradient(circle at 15% 20%, rgba(79, 209, 255, 0.14), #050609 65%);
+  background: #0f172a;
   padding: 32px 0 48px;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .filtered-subtitle {
-  margin: 8px 0 0;
+  margin: 8px 0 12px;
   opacity: 1;
   font-size: 0.98rem;
   color: #dfe4ff;
@@ -48,6 +48,54 @@
   font-size: 0.9rem;
 }
 
+.filtered-search-bar {
+  display: flex;
+  gap: 6px;
+  max-width: 500px;
+  margin-top: 8px;
+}
+
+.filtered-search-input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(92, 209, 255, 0.4);
+  background: #0c1427;
+  color: #e5edff;
+  font-size: 0.85rem;
+  box-shadow: inset 0 0 12px rgba(92, 209, 255, 0.08);
+  height: 32px;
+}
+
+.filtered-search-input:focus {
+  outline: none;
+  border-color: rgba(92, 209, 255, 0.8);
+}
+
+.filtered-search-input::placeholder {
+  color: #6b7897;
+}
+
+.filtered-search-btn {
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  color: #0b0c1a;
+  border: none;
+  border-radius: 7px;
+  padding: 6px 12px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  height: 32px;
+  box-shadow:
+    0 0 10px rgba(79,209,255,0.45),
+    0 0 10px rgba(255,79,216,0.35);
+  transition: transform 0.2s ease;
+}
+
+.filtered-search-btn:hover {
+  transform: translateY(-1px);
+}
+
 @media (max-width: 768px) {
   .filtered-header {
     padding: 0 16px;
@@ -55,5 +103,9 @@
 
   .filtered-header h1 {
     font-size: 1.6rem;
+  }
+  
+  .filtered-search-bar {
+    max-width: 100%;
   }
 }
