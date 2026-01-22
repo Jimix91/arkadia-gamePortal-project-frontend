@@ -87,22 +87,32 @@ function GameDetails() {
         <p>
           <strong>Year:</strong> {game.year || "Unknown"}
         </p>
-        <div>
-          {game.averageRating ? (
-            <span className="rating-stars">
-              {[...Array(10)].map((_, i) => (
-                <span
-                  key={i}
-                  className={i < game.averageRating ? "star filled" : "star"}
-                >
-                  ★
-                </span>
-              ))}
-            </span>
-          ) : (
-            "No ratings yet"
-          )}
-        </div>
+      <div className="rating">
+  {game.averageRating ? (
+    <>
+      <span className="rating-number">
+        {game.averageRating.toFixed(1)}
+      </span>
+
+      <div className="stars">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            className={
+              star <= Math.round(game.averageRating)
+                ? "star filled"
+                : "star"
+            }
+          >
+            ★
+          </span>
+        ))}
+      </div>
+    </>
+  ) : (
+    <span className="no-rating">No ratings yet</span>
+  )}
+</div>
         <p><strong>Description:</strong> {game.description}</p>
         {isLoggedIn && (
           <div className="game-actions">

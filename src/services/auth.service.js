@@ -25,19 +25,18 @@ class AuthService {
 
   login = requestBody => {
     return this.api.post('/auth/login', requestBody);
-
   };
 
   signup = requestBody => {
     return this.api.post('/auth/signup', requestBody);
-   
-    
+  };
+
+  googleLogin = (credential) => {
+    return this.api.post('/auth/google', { credential });
   };
 
   verify = () => {
     return this.api.get('/auth/verify');
-   
-    
   };
 }
 
