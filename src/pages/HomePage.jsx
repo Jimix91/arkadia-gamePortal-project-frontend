@@ -5,12 +5,10 @@ function HomePage() {
   return (
     <div className="home-page">
       <header className="home-header">
-        <div className="hero-pill">Selección destacada</div>
-        <h1 className="home-title">Arkadia Game Portal</h1>
+        <h1 className="home-title">Arkadia | Donde los Juegos se Reseñan</h1>
         <p className="home-subtitle">Descubre, puntúa y sigue los mejores títulos curados por la comunidad.</p>
         <div className="home-actions">
           <a className="btn-primary" href="/games">Ver todos los juegos</a>
-          <a className="btn-ghost" href="#top-rated">Ver mejor valorados</a>
         </div>
       </header>
 

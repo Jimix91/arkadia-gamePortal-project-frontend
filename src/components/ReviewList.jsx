@@ -116,27 +116,25 @@ function ReviewList({ gameId }) {
   </div>
 ) : (
             <>
-              <div className="review-card">
-                <div className="review-header">
-                  <span className="review-author">{review.author.name}</span>
-                  <span className="review-date">{new Date(review.createdAt).toLocaleDateString()}</span>
-                </div>
-                 <div className="rating-number">{review.rating}</div>
-                <div className="rating-stars">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className={i < review.rating ? "star filled" : "star"}>★</span>
-                  ))}
-                </div>
-
-                <div className="review-content">{review.content}</div>
-
-                {isOwner(review) && (
-                  <div className="review-actions">
-                    <button onClick={() => handleEditClick(review)} className="edit-button">✏️ Editar</button>
-                    <button onClick={() => handleDelete(review._id)} className="delete-button">🗑️ Borrar</button>
-                  </div>
-                )}
+              <div className="review-header">
+                <span className="review-author">{review.author.name}</span>
+                <span className="review-date">{new Date(review.createdAt).toLocaleDateString()}</span>
               </div>
+              <div className="rating-number">{review.rating}</div>
+              <div className="rating-stars">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className={i < review.rating ? "star filled" : "star"}>★</span>
+                ))}
+              </div>
+
+              <div className="review-content">{review.content}</div>
+
+              {isOwner(review) && (
+                <div className="review-actions">
+                  <button onClick={() => handleEditClick(review)} className="edit-button">✏️ Editar</button>
+                  <button onClick={() => handleDelete(review._id)} className="delete-button">🗑️ Borrar</button>
+                </div>
+              )}
             </>
           )}
         </div>

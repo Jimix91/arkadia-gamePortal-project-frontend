@@ -4,9 +4,13 @@ nav {
   align-items: center;
   height: 100px;
   padding: 0 30px;
-  background-color: #03040c;
-  box-shadow: 0 0 12px rgba(48, 93, 109, 0.25);
+  background: linear-gradient(180deg, #0f1020 0%, #0a0b16 100%);
+  border-bottom: 2px solid rgba(79, 209, 255, 0.25);
+  box-shadow: 
+    0 0 20px rgba(79, 209, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.5);
   color: #ffffff;
+  gap: 30px;
 }
 
 /* Left */
@@ -43,7 +47,6 @@ nav {
   gap: 10px;
 }
 
-/* Buttons */
 nav button {
   background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
   color: #fff;
@@ -58,6 +61,21 @@ nav button {
     0 0 10px rgba(255,79,216,0.4);
 
   transition: all 0.25s ease;
+}
+
+nav button.btn-admin {
+  background: linear-gradient(135deg, #ffcc00, #ff9500);
+  color: #0b0c1a;
+  box-shadow:
+    0 0 10px rgba(255,204,0,0.4),
+    0 0 10px rgba(255,149,0,0.4);
+}
+
+nav button.btn-admin:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 16px rgba(255,204,0,0.8),
+    0 0 16px rgba(255,149,0,0.8);
 }
 
 nav button:hover {
@@ -83,4 +101,63 @@ nav button:hover {
 .user-name:hover {
   transform: scale(1.05);
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 380px;
+  height: 42px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid rgba(79, 209, 255, 0.35);
+  border-radius: 10px;
+  background: rgba(15, 16, 32, 0.8);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 8px rgba(79, 209, 255, 0.15);
+}
+
+.search-input::placeholder {
+  color: #6b7280;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: rgba(79, 209, 255, 0.7);
+  background: rgba(15, 16, 32, 0.95);
+  box-shadow:
+    0 0 8px rgba(79, 209, 255, 0.3),
+    inset 0 0 8px rgba(79, 209, 255, 0.08);
+}
+
+.search-btn {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow:
+    0 0 10px rgba(79, 209, 255, 0.4),
+    0 0 10px rgba(255, 79, 216, 0.4);
+  transition: all 0.25s ease;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 16px rgba(79, 209, 255, 0.8),
+    0 0 16px rgba(255, 79, 216, 0.8);
 }

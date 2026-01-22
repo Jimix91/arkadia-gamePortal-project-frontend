@@ -9,7 +9,7 @@ import CreateReview from "../components/CreateReview"
 function GameDetails() {
   const { gameId } = useParams()
   const navigate = useNavigate()
-  const { isLoggedIn } = useContext(AuthContext)
+  const { isLoggedIn, user } = useContext(AuthContext)
   const [game, setGame] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -149,7 +149,7 @@ function GameDetails() {
           <p>{game.description || "Sin descripción disponible."}</p>
         </div>
 
-        {isLoggedIn && (
+        {isLoggedIn && user?.role === "admin" && (
           <div className="game-actions">
             <NavLink to={`/games/edit/${gameId}`}>
               <button className="edit-button">✏️ Editar juego</button>

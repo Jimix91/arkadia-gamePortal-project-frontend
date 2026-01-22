@@ -14,7 +14,7 @@ html, body {
 .home-page {
   min-height: 100vh;
   width: 100vw;
-  background: radial-gradient(circle at 15% 20%, rgba(79, 209, 255, 0.18), #0b0c1a 60%);
+  background: radial-gradient(circle at 15% 20%, rgba(79, 209, 255, 0.14), #050609 65%);
   color: #ffffff;
   padding-bottom: 48px;
 }

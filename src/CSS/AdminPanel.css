@@ -1,0 +1,226 @@
+.admin-panel {
+  min-height: calc(100vh - 64px);
+  background: radial-gradient(circle at 15% 20%, rgba(79, 209, 255, 0.14), #050609 65%);
+  padding: 48px 32px;
+  color: #ffffff;
+}
+
+.admin-header {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid rgba(79, 209, 255, 0.2);
+}
+
+.admin-header h1 {
+  font-size: 2.4rem;
+  margin: 0 0 8px;
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-header .subtitle {
+  margin: 0;
+  color: #dfe4ff;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+.users-container {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  background: linear-gradient(135deg, rgba(31, 32, 64, 0.9), rgba(20, 20, 40, 0.92));
+  border: 1px solid rgba(79, 209, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 24px rgba(79, 209, 255, 0.15);
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table thead {
+  background: rgba(79, 209, 255, 0.08);
+  border-bottom: 1px solid rgba(79, 209, 255, 0.2);
+}
+
+.users-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  color: #4fd1ff;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.users-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(79, 209, 255, 0.06);
+  color: #dfe4ff;
+  font-size: 0.95rem;
+}
+
+.user-row:hover {
+  background: rgba(79, 209, 255, 0.04);
+}
+
+.edit-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(15, 16, 32, 0.8);
+  border: 1px solid rgba(79, 209, 255, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: rgba(79, 209, 255, 0.7);
+  box-shadow: 0 0 8px rgba(79, 209, 255, 0.3);
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.role-badge.role-user {
+  background: rgba(79, 209, 255, 0.12);
+  color: #4fd1ff;
+  border: 1px solid rgba(79, 209, 255, 0.3);
+}
+
+.role-badge.role-admin {
+  background: rgba(255, 204, 0, 0.15);
+  color: #ffcc00;
+  border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-save,
+.btn-cancel {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #4fd1ff, #4fb3e8);
+  color: #0b0c1a;
+  box-shadow: 0 0 8px rgba(79, 209, 255, 0.3);
+}
+
+.btn-edit:hover {
+  box-shadow: 0 0 14px rgba(79, 209, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  box-shadow: 0 0 8px rgba(255, 107, 107, 0.2);
+}
+
+.btn-delete:hover {
+  background: rgba(255, 107, 107, 0.3);
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+.btn-save:hover {
+  box-shadow: 0 0 14px rgba(76, 175, 80, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #8fa2d6;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-cancel:hover {
+  color: #b8c2ff;
+  border-color: rgba(79, 209, 255, 0.3);
+}
+
+.users-summary {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  background: rgba(79, 209, 255, 0.08);
+  border: 1px solid rgba(79, 209, 255, 0.12);
+  border-radius: 12px;
+  display: flex;
+  gap: 32px;
+}
+
+.users-summary p {
+  margin: 0;
+  color: #dfe4ff;
+  font-size: 0.95rem;
+}
+
+.users-summary strong {
+  color: #4fd1ff;
+}
+
+.error {
+  text-align: center;
+  color: #ff6b6b;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .admin-panel {
+    padding: 24px 16px;
+  }
+
+  .admin-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .users-table {
+    font-size: 0.85rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 12px 8px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .users-summary {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -7,17 +7,33 @@ function GameList({ minRating = 0 }) {
   const [games, setGames] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
   const platformFilter = searchParams.get("platform") || ""
+  const searchQuery = searchParams.get("search") || ""
 
   useEffect(() => {
     getAllGames(platformFilter)
       .then((data) => {
-        const filtered = minRating
+        let filtered = minRating
           ? data.filter((g) => (g.averageRating || 0) >= minRating)
           : data
+        
+        if (searchQuery.trim()) {
+          const query = searchQuery.toLowerCase();
+          filtered = filtered.filter((g) => {
+            const titleMatch = g.title.toLowerCase().includes(query);
+            const developerMatch = (g.developer || "").toLowerCase().includes(query);
+            const yearMatch = (g.year || "").toString().includes(query);
+            const platformMatch = (g.platforms || []).some((p) =>
+              p.toLowerCase().includes(query)
+            );
+            
+            return titleMatch || developerMatch || yearMatch || platformMatch;
+          });
+        }
+        
         setGames(filtered)
       })
       .catch((err) => console.log("Error obteniendo la lista de juegos", err))
-  }, [platformFilter, minRating])
+  }, [platformFilter, minRating, searchQuery])
 
   const clearFilter = () => {
     setSearchParams({})
@@ -25,9 +41,13 @@ function GameList({ minRating = 0 }) {
 
   return (
     <div className="game-list">
-      {platformFilter && (
+      {(platformFilter || searchQuery) && (
         <div className="active-filter">
-          <span>Filtrado por plataforma: {platformFilter}</span>
+          <span>
+            {platformFilter && `Filtrado por plataforma: ${platformFilter}`}
+            {platformFilter && searchQuery && " • "}
+            {searchQuery && `Búsqueda: "${searchQuery}"`}
+          </span>
           <button onClick={clearFilter} className="clear-filter">Limpiar</button>
         </div>
       )}

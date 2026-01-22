@@ -5,6 +5,8 @@ import "../CSS/FilteredGamesPage.css";
 function FilteredGamesPage() {
   const [searchParams] = useSearchParams();
   const platform = searchParams.get("platform");
+  const search = searchParams.get("search");
+  const hasFilters = platform || search;
 
   return (
     <div className="filtered-games-page">
@@ -14,9 +16,14 @@ function FilteredGamesPage() {
           {platform && (
             <span className="chip">Plataforma: {platform}</span>
           )}
+          {search && (
+            <span className="chip">Búsqueda: "{search}"</span>
+          )}
         </div>
         <p className="filtered-subtitle">
-          Haz clic en una plataforma para filtrar. Usa "Limpiar" para ver todas las plataformas de nuevo.
+          {hasFilters
+            ? "Usa \"Limpiar\" para ver todos los juegos de nuevo."
+            : "Busca un juego, haz clic en una plataforma o explora toda la colección."}
         </p>
       </header>
 

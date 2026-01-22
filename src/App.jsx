@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage"
 import GameDetails from "./pages/GameDetails"
 import AboutPage from "./pages/AboutPage"
 import FilteredGamesPage from "./pages/FilteredGamesPage"
+import AdminPanel from "./pages/AdminPanel"
 import Footer from "./components/Footer"
 
 function App() {
@@ -23,28 +24,17 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route path="/about" element={<AboutPage />} />
-
-        
+        <Route path="/admin" element={<IsPrivate><AdminPanel /></IsPrivate>} />
         <Route path="/games/create" element={<IsPrivate><CreateGame /></IsPrivate>}/>
-
-        
         <Route path="/games" element={<FilteredGamesPage />} />
-
-      
         <Route path="/games/:gameId" element={<GameDetails />} />
-
-      
         <Route path="/games/edit/:gameId" element={ <IsPrivate> <EditGame />  </IsPrivate>  }/>
-
-        <Route  path="/signup" element={   <IsAnon> <SignupPage /> </IsAnon> } />
-
-        <Route  path="/login" element={  <IsAnon>   <LoginPage />  </IsAnon> } />
-
+        <Route path="/signup" element={ <IsAnon> <SignupPage /> </IsAnon> } />
+        <Route path="/login" element={ <IsAnon> <LoginPage />  </IsAnon> } />
       </Routes>
       <Footer />
     </>
   )
 }
-
 export default App
 
