@@ -21,7 +21,7 @@ function CreateGame() {
         const platforms = await getPlatforms();
         setPlatformOptions(platforms);
       } catch (err) {
-        console.error("Error fetching platforms", err);
+        console.error("Error obteniendo plataformas", err);
       }
     };
     fetchPlatforms();
@@ -46,22 +46,22 @@ function CreateGame() {
     createGame(newGame, storedToken)
       .then(() => navigate("/"))
       .catch((err) =>
-        console.log("Something went wrong adding your game", err)
+        console.log("Algo salió mal al añadir tu juego", err)
       );
   };
 
   return (
     <form onSubmit={handleSubmit} className="create-game-form">
-      <label>Title</label>
+      <label>Título</label>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="e.g Super Mario"
+        placeholder="Ej: Super Mario"
         required
       />
 
-      <label>Image</label>
+      <label>Imagen</label>
       <input
         type="url"
         value={image}
@@ -69,13 +69,13 @@ function CreateGame() {
         placeholder="https://....."
       />
 
-      <label>Platforms</label>
+      <label>Plataformas</label>
       <div className="dropdown-container form-input">
         <div
           className="dropdown-header"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          {platforms.length > 0 ? platforms.join(", ") : "Select platforms"}
+          {platforms.length > 0 ? platforms.join(", ") : "Selecciona plataformas"}
           <span className="dropdown-arrow">▼</span>
         </div>
 
@@ -95,15 +95,15 @@ function CreateGame() {
         )}
       </div>
 
-      <label>Description</label>
+      <label>Descripción</label>
       <input
         type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="This game is about...."
+        placeholder="Este juego trata sobre..."
       />
 
-      <button type="submit">Save Game</button>
+      <button type="submit">Guardar juego</button>
     </form>
   );
 }

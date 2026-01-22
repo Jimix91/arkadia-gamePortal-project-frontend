@@ -55,40 +55,40 @@ function EditGame() {
 
   return (
     <div className="edit-game">
-      <h1 className="edit-game-title">Edit Game</h1>
+      <h1 className="edit-game-title">Editar juego</h1>
 
       <form className="edit-game-form" onSubmit={handleSubmit}>
-        <label className="edit-form-label">Title</label>
+        <label className="edit-form-label">Título</label>
         <input
           className="edit-form-input"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Game title"
+          placeholder="Título del juego"
         />
 
-        <label className="edit-form-label">Image URL</label>
+        <label className="edit-form-label">URL de imagen</label>
         <input
           className="edit-form-input"
           value={image}
           onChange={(e) => setImage(e.target.value)}
-          placeholder="Image URL"
+          placeholder="URL de la imagen"
         />
 
-        <label className="edit-form-label">Description</label>
+        <label className="edit-form-label">Descripción</label>
         <textarea
           className="edit-form-input"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
+          placeholder="Descripción"
         />
 
-        <label className="edit-form-label">Platforms</label>
+        <label className="edit-form-label">Plataformas</label>
         <div className="dropdown-container form-input">
           <div
             className="dropdown-header"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            {platforms.length > 0 ? platforms.join(", ") : "Select platforms"}
+            {platforms.length > 0 ? platforms.join(", ") : "Selecciona plataformas"}
             <span className="dropdown-arrow">▼</span>
           </div>
 
@@ -109,7 +109,7 @@ function EditGame() {
 
         <div className="edit-game-actions">
           <button className="edit-form-button" type="submit">
-            💾 Save changes
+            💾 Guardar cambios
           </button>
 
           <button
@@ -117,7 +117,7 @@ function EditGame() {
             type="button"
             onClick={() => navigate(-1)}
           >
-            Cancel
+            Cancelar
           </button>
         </div>
       </form>

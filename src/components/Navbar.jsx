@@ -18,19 +18,19 @@ function Navbar() {
       <div className="nav-right">
         {isLoggedIn && (
           <>
-            <Link to="/about"><button>About</button></Link>
-            <Link to="/games"><button>Games</button></Link>
-            <Link to="/games/create"><button>Create</button></Link>
-            <button onClick={logOutUser}>Logout</button>
+            <Link to="/about"><button>Acerca</button></Link>
+            <Link to="/games"><button>Juegos</button></Link>
+            <Link to="/games/create"><button>Crear</button></Link>
+            <button onClick={logOutUser}>Salir</button>
             {user && <span className="user-name">{user.name}</span>}
           </>
         )}
 
         {!isLoggedIn && (
           <>
-            <Link to="/about"><button>About</button></Link>
-            <Link to="/signup"><button>Sign Up</button></Link>
-            <Link to="/login"><button>Login</button></Link>
+            <Link to="/about"><button>Acerca</button></Link>
+            <Link to="/signup"><button>Registro</button></Link>
+            <Link to="/login"><button>Entrar</button></Link>
           </>
         )}
       </div>

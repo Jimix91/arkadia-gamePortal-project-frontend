@@ -149,6 +149,24 @@
 	font-weight: 700;
 }
 
+.about-profile {
+	max-width: 1100px;
+	margin: 0 auto 44px;
+	padding: 22px 24px;
+	border-radius: 18px;
+	background: linear-gradient(135deg, rgba(79, 209, 255, 0.08), rgba(255, 79, 216, 0.06));
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	box-shadow: 0 0 18px rgba(79, 209, 255, 0.15);
+}
+
+.about-profile h2 {
+	margin: 6px 0 10px;
+}
+
+.about-profile .subtitle {
+	margin-bottom: 10px;
+}
+
 @media (max-width: 900px) {
 	.about-hero {
 		grid-template-columns: 1fr;

@@ -21,7 +21,7 @@ function ReviewList({ gameId }) {
         setReviews(data)
       })
       .catch((err) => {
-        console.log("Something went wrong trying to get the Reviews List", err)
+        console.log("Error obteniendo la lista de reseñas", err)
       })
   }
 
@@ -29,17 +29,17 @@ function ReviewList({ gameId }) {
     const storedToken = localStorage.getItem("authToken")
     
     if (!storedToken) {
-      console.log("You need to be logged in to delete a review")
+      console.log("Necesitas iniciar sesión para borrar una reseña")
       return
     }
 
-    if (window.confirm("Are you sure you want to delete this review?")) {
+    if (window.confirm("¿Seguro que quieres borrar esta reseña?")) {
       deleteReview(reviewId, storedToken)
         .then(() => {
           loadReviews()
         })
         .catch((err) => {
-          console.log("Something went wrong deleting the review", err)
+          console.log("Error borrando la reseña", err)
         })
     }
   }
@@ -58,7 +58,7 @@ function ReviewList({ gameId }) {
     const storedToken = localStorage.getItem("authToken")
     
     if (!storedToken) {
-      console.log("You need to be logged in to update a review")
+      console.log("Necesitas iniciar sesión para actualizar una reseña")
       return
     }
 
@@ -69,7 +69,7 @@ function ReviewList({ gameId }) {
         setEditData({ content: "", rating: 0 })
       })
       .catch((err) => {
-        console.log("Something went wrong updating the review", err)
+        console.log("Error actualizando la reseña", err)
       })
   }
 
@@ -86,11 +86,11 @@ function ReviewList({ gameId }) {
     <textarea
       value={editData.content}
       onChange={(e) => setEditData({ ...editData, content: e.target.value })}
-      placeholder="Edit your review"
+      placeholder="Edita tu reseña"
     />
 
     <div className="edit-rating">
-      <label>Rating:</label>
+      <label>Puntuación:</label>
       <div className="star-rating">
         {[1, 2, 3, 4, 5].map((star) => (
           <span
@@ -108,10 +108,10 @@ function ReviewList({ gameId }) {
     </div>
 
     <button onClick={() => handleEditSave(review._id)} className="save-button">
-      Save
+      Guardar
     </button>
     <button onClick={handleEditCancel} className="cancel-button">
-      Cancel
+      Cancelar
     </button>
   </div>
 ) : (
@@ -132,8 +132,8 @@ function ReviewList({ gameId }) {
 
                 {isOwner(review) && (
                   <div className="review-actions">
-                    <button onClick={() => handleEditClick(review)} className="edit-button">✏️ Edit</button>
-                    <button onClick={() => handleDelete(review._id)} className="delete-button">🗑️ Delete</button>
+                    <button onClick={() => handleEditClick(review)} className="edit-button">✏️ Editar</button>
+                    <button onClick={() => handleDelete(review._id)} className="delete-button">🗑️ Borrar</button>
                   </div>
                 )}
               </div>

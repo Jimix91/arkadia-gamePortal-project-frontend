@@ -10,13 +10,13 @@ function FilteredGamesPage() {
     <div className="filtered-games-page">
       <header className="filtered-header">
         <div className="filtered-title-row">
-          <h1>Browse Games</h1>
+          <h1>Explorar juegos</h1>
           {platform && (
-            <span className="chip">Platform: {platform}</span>
+            <span className="chip">Plataforma: {platform}</span>
           )}
         </div>
         <p className="filtered-subtitle">
-          Click a platform badge to filter. Use "Clear" to see all platforms again.
+          Haz clic en una plataforma para filtrar. Usa "Limpiar" para ver todas las plataformas de nuevo.
         </p>
       </header>
 

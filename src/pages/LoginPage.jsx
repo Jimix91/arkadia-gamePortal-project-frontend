@@ -37,7 +37,7 @@ function LoginPage(props) {
         navigate('/');
       })
       .catch((error) => {
-        const errorDescription = error?.response?.data?.message || "Login failed";
+        const errorDescription = error?.response?.data?.message || "Error al iniciar sesión";
         setErrorMessage(errorDescription);
       })
   };
@@ -46,7 +46,7 @@ function LoginPage(props) {
     const credential = credentialResponse?.credential;
 
     if (!credential) {
-      setErrorMessage("Google login failed. Try again.");
+      setErrorMessage("Falló el inicio con Google. Intenta de nuevo.");
       return;
     }
 
@@ -57,21 +57,21 @@ function LoginPage(props) {
         navigate('/');
       })
       .catch((error) => {
-        const errorDescription = error?.response?.data?.message || "Google login failed";
+        const errorDescription = error?.response?.data?.message || "Falló el inicio con Google";
         setErrorMessage(errorDescription);
       });
   };
 
   const handleGoogleError = () => {
-    setErrorMessage("Google login failed. Try again.");
+    setErrorMessage("Falló el inicio con Google. Intenta de nuevo.");
   };
   
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      <h1>Iniciar sesión</h1>
 
       <form onSubmit={handleLoginSubmit} autoComplete="on">
-        <label>Email:</label>
+        <label>Correo:</label>
         <input
           type="email"
           name="email"
@@ -80,7 +80,7 @@ function LoginPage(props) {
           onChange={handleEmail}
         />
 
-        <label>Password:</label>
+        <label>Contraseña:</label>
         <div className="password-field">
           <input
             type={showPassword ? "text" : "password"}
@@ -94,21 +94,21 @@ function LoginPage(props) {
             className="toggle-password"
             onClick={() => setShowPassword((prev) => !prev)}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? "Ocultar" : "Mostrar"}
           </button>
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Entrar</button>
       </form>
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
       <div className="social-login">
-        <p>Or continue with</p>
+        <p>O continúa con</p>
         <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
       </div>
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <p>¿Aún no tienes cuenta?</p>
+      <Link to={"/signup"}> Regístrate</Link>
     </div>
   )
 }

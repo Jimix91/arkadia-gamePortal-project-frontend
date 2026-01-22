@@ -23,7 +23,7 @@ function GameDetails() {
       setError(null)
     } catch (err) {
       console.error(err)
-      setError("Unable to load game details.")
+      setError("No se pudieron cargar los detalles del juego.")
     } finally {
       setLoading(false)
     }
@@ -34,7 +34,7 @@ function GameDetails() {
   }, [gameId])
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm("Delete this game? This action cannot be undone.")
+    const confirmDelete = window.confirm("¿Borrar este juego? Esta acción no se puede deshacer.")
     if (!confirmDelete) return
 
     try {
@@ -43,7 +43,7 @@ function GameDetails() {
       navigate("/games")
     } catch (err) {
       console.error(err)
-      setError("Could not delete the game. Please try again.")
+      setError("No se pudo borrar el juego. Intenta de nuevo.")
     }
   }
 
@@ -56,7 +56,7 @@ function GameDetails() {
     return (
       <div className="game-details-page">
         <div className="game-details">
-          <p>Loading game...</p>
+          <p>Cargando juego...</p>
         </div>
       </div>
     )
@@ -79,7 +79,7 @@ function GameDetails() {
       <div className="game-details">
         <div className="game-top">
           <div>
-            <p className="eyebrow">Game profile</p>
+            <p className="eyebrow">Perfil del juego</p>
             <h3>{game.title}</h3>
             <div className="meta-row">
               {(game.platforms || []).map((plat) => (
@@ -91,8 +91,8 @@ function GameDetails() {
                   <span className="badge">{plat}</span>
                 </NavLink>
               ))}
-              <span className="chip">{game.developer || "Unknown"}</span>
-              <span className="chip">{game.year || "Unknown"}</span>
+              <span className="chip">{game.developer || "Desconocido"}</span>
+              <span className="chip">{game.year || "Desconocido"}</span>
             </div>
           </div>
 
@@ -114,10 +114,10 @@ function GameDetails() {
                     </span>
                   ))}
                 </div>
-                <p className="rating-caption">Community score</p>
+                <p className="rating-caption">Puntaje de la comunidad</p>
               </>
             ) : (
-              <span className="no-rating">No ratings yet</span>
+              <span className="no-rating">Sin valoraciones</span>
             )}
           </div>
         </div>
@@ -131,31 +131,31 @@ function GameDetails() {
 
         <div className="info-grid">
           <div>
-            <p className="label">Developer</p>
-            <p className="value">{game.developer || "Unknown"}</p>
+            <p className="label">Desarrollador</p>
+            <p className="value">{game.developer || "Desconocido"}</p>
           </div>
           <div>
-            <p className="label">Release year</p>
-            <p className="value">{game.year || "Unknown"}</p>
+            <p className="label">Año de lanzamiento</p>
+            <p className="value">{game.year || "Desconocido"}</p>
           </div>
           <div>
-            <p className="label">Platforms</p>
+            <p className="label">Plataformas</p>
             <p className="value value-wrap">{(game.platforms || []).join(", ")}</p>
           </div>
         </div>
 
         <div className="description-card">
-          <h4>Overview</h4>
-          <p>{game.description || "No description available."}</p>
+          <h4>Descripción</h4>
+          <p>{game.description || "Sin descripción disponible."}</p>
         </div>
 
         {isLoggedIn && (
           <div className="game-actions">
             <NavLink to={`/games/edit/${gameId}`}>
-              <button className="edit-button">✏️ Edit Game</button>
+              <button className="edit-button">✏️ Editar juego</button>
             </NavLink>
             <button onClick={handleDelete} className="delete-button">
-              🗑️ Delete Game
+              🗑️ Borrar juego
             </button>
           </div>
         )}

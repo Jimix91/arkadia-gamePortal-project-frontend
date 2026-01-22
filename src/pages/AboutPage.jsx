@@ -49,6 +49,19 @@ function AboutPage() {
         </div>
       </section>
 
+      <section className="about-profile">
+        <div>
+          <p className="eyebrow">Sobre el creador</p>
+          <h2>Hola, soy Joan Jimenez Camps</h2>
+          <p className="subtitle">Construí Arkadia como proyecto final del Bootcamp de Fullstack Web Development en Ironhack.</p>
+          <p className="subtitle">Me apasiona crear experiencias digitales útiles para comunidades gamers y seguir aprendiendo tecnologías modernas.</p>
+          <div className="hero-actions">
+            <a href="https://github.com/Jimix91" target="_blank" rel="noopener noreferrer" className="primary-btn">GitHub</a>
+            <a href="https://www.linkedin.com/in/joan-jim%C3%A9nez-camps-4084a8226/" target="_blank" rel="noopener noreferrer" className="ghost-btn">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+
       <section className="about-footer-cta">
         <div>
           <p className="eyebrow">Listo para jugar</p>

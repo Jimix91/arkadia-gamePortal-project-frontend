@@ -16,7 +16,7 @@ function GameList({ minRating = 0 }) {
           : data
         setGames(filtered)
       })
-      .catch((err) => console.log("Something went wrong trying to get the Games List", err))
+      .catch((err) => console.log("Error obteniendo la lista de juegos", err))
   }, [platformFilter, minRating])
 
   const clearFilter = () => {
@@ -27,8 +27,8 @@ function GameList({ minRating = 0 }) {
     <div className="game-list">
       {platformFilter && (
         <div className="active-filter">
-          <span>Filtered by platform: {platformFilter}</span>
-          <button onClick={clearFilter} className="clear-filter">Clear</button>
+          <span>Filtrado por plataforma: {platformFilter}</span>
+          <button onClick={clearFilter} className="clear-filter">Limpiar</button>
         </div>
       )}
       {games.map((game) => (
@@ -70,10 +70,10 @@ function GameList({ minRating = 0 }) {
                   </div>
                 </>
               ) : (
-                <span className="no-rating">No ratings yet</span>
+                <span className="no-rating">Sin valoraciones</span>
               )}
             </div>
-            <NavLink to={`/games/${game._id}`} className="details-link">See Details</NavLink>
+            <NavLink to={`/games/${game._id}`} className="details-link">Ver detalles</NavLink>
           </div>
         </div>
       ))}

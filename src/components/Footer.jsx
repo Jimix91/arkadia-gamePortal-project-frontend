@@ -12,15 +12,15 @@ function Footer() {
         </div>
 
         <div className="footer__links">
-          <Link to="/about">About</Link>
-          <Link to="/games">Games</Link>
+          <Link to="/about">Acerca</Link>
+          <Link to="/games">Juegos</Link>
           <Link to="/games/create">Crear juego</Link>
-          <Link to="/signup">Unirse</Link>
+          <Link to="/signup">Crear cuenta</Link>
         </div>
       </div>
 
       <div className="footer__bottom">
-        <span>© {new Date().getFullYear()} Arkadia. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Arkadia. Todos los derechos reservados.</span>
         <span className="footer__tag">Hecho con pasión gamer.</span>
       </div>
     </footer>
