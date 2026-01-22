@@ -6,9 +6,10 @@ export const getPlatforms = async () => {
   return platforms;
 };
 
-export const getAllGames = async () => {
+export const getAllGames = async (platform) => {
   try {
-    const res = await axios.get(`${API_URL}/api/games`);
+    const query = platform ? `?platform=${encodeURIComponent(platform)}` : "";
+    const res = await axios.get(`${API_URL}/api/games${query}`);
     return res.data;
   } catch (err) {
     console.error("Error fetching games", err);

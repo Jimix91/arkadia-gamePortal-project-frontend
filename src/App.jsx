@@ -11,6 +11,8 @@ import IsAnon from "./components/IsAnon"
 import HomePage from "./pages/HomePage"
 import GameDetails from "./pages/GameDetails"
 import AboutPage from "./pages/AboutPage"
+import FilteredGamesPage from "./pages/FilteredGamesPage"
+import Footer from "./components/Footer"
 
 function App() {
   return (
@@ -26,7 +28,7 @@ function App() {
         <Route path="/games/create" element={<IsPrivate><CreateGame /></IsPrivate>}/>
 
         
-        <Route path="/games" element={<GameList />} />
+        <Route path="/games" element={<FilteredGamesPage />} />
 
       
         <Route path="/games/:gameId" element={<GameDetails />} />
@@ -39,6 +41,7 @@ function App() {
         <Route  path="/login" element={  <IsAnon>   <LoginPage />  </IsAnon> } />
 
       </Routes>
+      <Footer />
     </>
   )
 }

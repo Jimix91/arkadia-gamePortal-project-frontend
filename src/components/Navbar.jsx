@@ -18,6 +18,7 @@ function Navbar() {
       <div className="nav-right">
         {isLoggedIn && (
           <>
+            <Link to="/about"><button>About</button></Link>
             <Link to="/games"><button>Games</button></Link>
             <Link to="/games/create"><button>Create</button></Link>
             <button onClick={logOutUser}>Logout</button>
@@ -27,6 +28,7 @@ function Navbar() {
 
         {!isLoggedIn && (
           <>
+            <Link to="/about"><button>About</button></Link>
             <Link to="/signup"><button>Sign Up</button></Link>
             <Link to="/login"><button>Login</button></Link>
           </>

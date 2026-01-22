@@ -1,19 +1,36 @@
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useSearchParams } from "react-router-dom"
 import { getAllGames } from "../services/games.service"
 import "../CSS/GameList.css"
 
-function GameList() {
+function GameList({ minRating = 0 }) {
   const [games, setGames] = useState([])
+  const [searchParams, setSearchParams] = useSearchParams()
+  const platformFilter = searchParams.get("platform") || ""
 
   useEffect(() => {
-    getAllGames()
-      .then((data) => setGames(data))
+    getAllGames(platformFilter)
+      .then((data) => {
+        const filtered = minRating
+          ? data.filter((g) => (g.averageRating || 0) >= minRating)
+          : data
+        setGames(filtered)
+      })
       .catch((err) => console.log("Something went wrong trying to get the Games List", err))
-  }, [])
+  }, [platformFilter, minRating])
+
+  const clearFilter = () => {
+    setSearchParams({})
+  }
 
   return (
     <div className="game-list">
+      {platformFilter && (
+        <div className="active-filter">
+          <span>Filtered by platform: {platformFilter}</span>
+          <button onClick={clearFilter} className="clear-filter">Clear</button>
+        </div>
+      )}
       {games.map((game) => (
         <div key={game._id} className="game-card">
           {game.image && <img src={game.image} alt={game.title} />}
@@ -21,7 +38,13 @@ function GameList() {
             <h3>{game.title}</h3>
             <div>
               {game.platforms.map((plat) => (
-                <span key={plat} className="badge">{plat}</span>
+                <NavLink
+                  key={plat}
+                  to={`/games?platform=${encodeURIComponent(plat)}`}
+                  className="platform-link"
+                >
+                  <span className="badge">{plat}</span>
+                </NavLink>
               ))}
             </div>
             <div className="rating">
@@ -50,7 +73,7 @@ function GameList() {
                 <span className="no-rating">No ratings yet</span>
               )}
             </div>
-            <NavLink to={`/games/${game._id}`}>See Details</NavLink>
+            <NavLink to={`/games/${game._id}`} className="details-link">See Details</NavLink>
           </div>
         </div>
       ))}

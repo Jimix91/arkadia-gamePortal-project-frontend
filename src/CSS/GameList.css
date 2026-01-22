@@ -11,6 +11,47 @@
   background-color: #0f1020;
 }
 
+/* Filtro activo */
+.active-filter {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  margin: 0 0 4px 0;
+  border-radius: 12px;
+  background: rgba(79, 209, 255, 0.08);
+  border: 1px solid rgba(79, 209, 255, 0.35);
+  color: #dfe4ff;
+}
+
+.active-filter span {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.clear-filter {
+  background: transparent;
+  color: #4fd1ff;
+  border: 1px solid rgba(79, 209, 255, 0.7);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 8px rgba(79, 209, 255, 0.25);
+}
+
+.clear-filter:hover {
+  color: #0f1020;
+  background: linear-gradient(135deg, #4fd1ff, #ff4fd8);
+  box-shadow:
+    0 0 10px rgba(79, 209, 255, 0.6),
+    0 0 10px rgba(255, 79, 216, 0.6);
+  border-color: transparent;
+}
+
 /* Card */
 .game-card {
   background-color: #1f2040;
@@ -77,7 +118,7 @@
 }
 
 /* Link */
-.game-card-content a {
+.game-card-content a.details-link {
   display: inline-block;
   margin-top: 12px;
   font-weight: 600;
@@ -89,9 +130,27 @@
   -webkit-text-fill-color: transparent;
 }
 
-.game-card-content a:hover {
+.game-card-content a.details-link:hover {
   filter: drop-shadow(0 0 6px rgba(79,209,255,0.8))
           drop-shadow(0 0 6px rgba(255,79,216,0.8));
+}
+
+.platform-link {
+  text-decoration: none;
+}
+
+.platform-link .badge {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.platform-link:hover .badge {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 10px rgba(79,209,255,0.8),
+    0 0 10px rgba(255,79,216,0.8);
 }
 /* Rating container */
 .rating {

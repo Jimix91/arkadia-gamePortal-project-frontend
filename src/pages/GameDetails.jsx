@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useParams, useNavigate, NavLink } from "react-router-dom"
-import { useContext } from "react"
 import { AuthContext } from "../context/auth.context"
 import { getGameById, deleteGame } from "../services/games.service"
 import "../CSS/GameDetails.css"
@@ -10,115 +9,151 @@ import CreateReview from "../components/CreateReview"
 function GameDetails() {
   const { gameId } = useParams()
   const navigate = useNavigate()
-  const { user } = useContext(AuthContext)
+  const { isLoggedIn } = useContext(AuthContext)
   const [game, setGame] = useState(null)
-  const [reviews, setReviews] = useState([])
-  const [loading, setLoading] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [refreshKey, setRefreshKey] = useState(0)
 
+  const fetchGame = async () => {
+    try {
+      setLoading(true)
+      const data = await getGameById(gameId)
+      setGame(data)
+      setError(null)
+    } catch (err) {
+      console.error(err)
+      setError("Unable to load game details.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
-    setLoading(true)
-    getGameById(gameId)
-      .then((data) => {
-        setGame(data)
-      })
-      .catch((err) => {
-        console.log("Something went wrong trying to get the Game Details", err)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+    fetchGame()
   }, [gameId])
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Delete this game? This action cannot be undone.")
+    if (!confirmDelete) return
 
-  if (loading) {
-    return <p>Loading game...</p>
-  }
-
-  if (!game) {
-    return <p>Game not found</p>
-  }
-
-
-  const handleDelete = () => {
-    const storedToken = localStorage.getItem("authToken")
-
-    if (!storedToken) {
-      console.log("You need to be logged in to delete a game")
-      return
-    }
-
-    if (window.confirm("Are you sure you want to delete this game?")) {
-      deleteGame(gameId, storedToken)
-        .then(() => {
-          navigate("/")
-        })
-        .catch((err) => {
-          console.log("Something went wrong deleting the game", err)
-        })
+    try {
+      const storedToken = localStorage.getItem("authToken")
+      await deleteGame(gameId, storedToken)
+      navigate("/games")
+    } catch (err) {
+      console.error(err)
+      setError("Could not delete the game. Please try again.")
     }
   }
-
-  const isLoggedIn = !!user
 
   const handleReviewCreated = () => {
-    setRefreshKey(prev => prev + 1)
+    setRefreshKey((prev) => prev + 1)
+    fetchGame()
   }
+
+  if (loading) {
+    return (
+      <div className="game-details-page">
+        <div className="game-details">
+          <p>Loading game...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="game-details-page">
+        <div className="game-details">
+          <p>{error}</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!game) return null
 
   return (
     <div className="game-details-page">
       <div className="game-details">
-        <h3>{game.title}</h3>
+        <div className="game-top">
+          <div>
+            <p className="eyebrow">Game profile</p>
+            <h3>{game.title}</h3>
+            <div className="meta-row">
+              {(game.platforms || []).map((plat) => (
+                <NavLink
+                  key={plat}
+                  to={`/games?platform=${encodeURIComponent(plat)}`}
+                  className="platform-link"
+                >
+                  <span className="badge">{plat}</span>
+                </NavLink>
+              ))}
+              <span className="chip">{game.developer || "Unknown"}</span>
+              <span className="chip">{game.year || "Unknown"}</span>
+            </div>
+          </div>
+
+          <div className="rating-pill">
+            {game.averageRating ? (
+              <>
+                <div className="rating-number">{game.averageRating.toFixed(1)}</div>
+                <div className="stars">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                      key={star}
+                      className={
+                        star <= Math.round(game.averageRating)
+                          ? "star filled"
+                          : "star"
+                      }
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <p className="rating-caption">Community score</p>
+              </>
+            ) : (
+              <span className="no-rating">No ratings yet</span>
+            )}
+          </div>
+        </div>
 
         {game.image && (
-          <img src={game.image} alt={game.title} />
+          <div className="image-frame">
+            <img src={game.image} alt={game.title} />
+            <div className="image-overlay" />
+          </div>
         )}
 
-        <p>
-          <strong>Platforms:</strong>{" "}
-          {game.platforms.map((plat) => (
-            <span key={plat} className="badge">{plat}</span>
-          ))}
-        </p>
-        <p>
-          <strong>Developer:</strong> {game.developer || "Unknown"}
-        </p>
+        <div className="info-grid">
+          <div>
+            <p className="label">Developer</p>
+            <p className="value">{game.developer || "Unknown"}</p>
+          </div>
+          <div>
+            <p className="label">Release year</p>
+            <p className="value">{game.year || "Unknown"}</p>
+          </div>
+          <div>
+            <p className="label">Platforms</p>
+            <p className="value value-wrap">{(game.platforms || []).join(", ")}</p>
+          </div>
+        </div>
 
-        <p>
-          <strong>Year:</strong> {game.year || "Unknown"}
-        </p>
-      <div className="rating">
-  {game.averageRating ? (
-    <>
-      <span className="rating-number">
-        {game.averageRating.toFixed(1)}
-      </span>
+        <div className="description-card">
+          <h4>Overview</h4>
+          <p>{game.description || "No description available."}</p>
+        </div>
 
-      <div className="stars">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <span
-            key={star}
-            className={
-              star <= Math.round(game.averageRating)
-                ? "star filled"
-                : "star"
-            }
-          >
-            ★
-          </span>
-        ))}
-      </div>
-    </>
-  ) : (
-    <span className="no-rating">No ratings yet</span>
-  )}
-</div>
-        <p><strong>Description:</strong> {game.description}</p>
         {isLoggedIn && (
           <div className="game-actions">
-            <NavLink to={`/games/edit/${gameId}`}><button className="edit-button">
-              ✏️ Edit Game
-            </button></NavLink>
+            <NavLink to={`/games/edit/${gameId}`}>
+              <button className="edit-button">✏️ Edit Game</button>
+            </NavLink>
             <button onClick={handleDelete} className="delete-button">
               🗑️ Delete Game
             </button>
@@ -126,18 +161,12 @@ function GameDetails() {
         )}
 
         <div className="reviews-section">
-
           <CreateReview gameId={gameId} onReviewCreated={handleReviewCreated} />
-
           <ReviewList key={refreshKey} gameId={gameId} />
         </div>
       </div>
     </div>
-
-
   )
-
-
 }
 
 export default GameDetails
