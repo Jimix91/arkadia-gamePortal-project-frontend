@@ -74,7 +74,7 @@ function ReviewList({ gameId }) {
   }
 
   const isOwner = (review) => {
-    return user && review.author._id === user._id
+    return user && (review.author._id === user._id || user.role === "admin")
   }
 
   return (
