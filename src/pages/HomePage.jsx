@@ -75,11 +75,6 @@ function HomePage() {
           <h4>Sube tus propios títulos</h4>
           <p>Formulario guiado para agregar juegos con portada, descripción y soporte multi-plataforma.</p>
         </div>
-        <div className="home-card">
-          <p className="label">Tecnología</p>
-          <h4>Stack moderno</h4>
-          <p>Frontend en React + Vite, backend Node/Express y autenticación JWT para una experiencia fluida.</p>
-        </div>
       </section>
 
       <main id="top-rated" className="home-content">

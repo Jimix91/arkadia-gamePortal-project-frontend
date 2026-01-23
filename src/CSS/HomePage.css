@@ -317,8 +317,9 @@
   margin: 80px auto;
   padding: 0 32px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  justify-items: center;
 }
 
 .home-card {
