@@ -15,10 +15,12 @@ import FilteredGamesPage from "./pages/FilteredGamesPage"
 import AdminPanel from "./pages/AdminPanel"
 import Footer from "./components/Footer"
 import UserProfile from "./pages/UserProfile"
+import ScrollToTop from "./components/ScrollToTop"
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
 
       <Routes>
