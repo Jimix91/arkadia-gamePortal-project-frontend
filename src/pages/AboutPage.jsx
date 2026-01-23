@@ -8,11 +8,7 @@ function AboutPage() {
         <p className="eyebrow">Sobre Arkadia</p>
         <h1>Stack moderno para reseñas gamers</h1>
         <p className="subtitle">Aplicación fullstack creada como proyecto final del Bootcamp de Fullstack Web Development en Ironhack.</p>
-        <p className="subtitle">Arkadia conecta jugadores, permite crear reseñas rápidas y descubrir títulos con filtros claros.</p>
-        <div className="hero-actions">
-          <a href="https://github.com/Jimix91" target="_blank" rel="noopener noreferrer" className="primary-btn">GitHub</a>
-          <a href="https://www.linkedin.com/in/joan-jim%C3%A9nez-camps-4084a8226/" target="_blank" rel="noopener noreferrer" className="ghost-btn">LinkedIn</a>
-        </div>
+        <p className="subtitle">Arkadia conecta jugadores, permite crear reseñas rápidas y descubrir títulos con filtros claros.</p>      
       </section>
 
       <section className="tech-grid">
