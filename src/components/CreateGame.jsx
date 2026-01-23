@@ -6,7 +6,7 @@ import "../CSS/CreateGame.css"
 
 function CreateGame() {
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [platforms, setPlatforms] = useState([]);
   const [description, setDescription] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -40,7 +40,7 @@ function CreateGame() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newGame = { title, image, platforms, description };
+    const newGame = { title, imageFile, platforms, description };
     const storedToken = localStorage.getItem("authToken");
 
     createGame(newGame, storedToken)
@@ -63,10 +63,9 @@ function CreateGame() {
 
       <label>Imagen</label>
       <input
-        type="url"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-        placeholder="https://....."
+        type="file"
+        accept="image/*"
+        onChange={(e) => setImageFile(e.target.files?.[0] || null)}
       />
 
       <label>Plataformas</label>

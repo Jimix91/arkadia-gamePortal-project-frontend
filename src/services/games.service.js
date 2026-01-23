@@ -29,7 +29,16 @@ export const getGameById = async (gameId) => {
 
 export const createGame = async (gameData, token) => {
   try {
-    const res = await axios.post(`${API_URL}/api/games`, gameData, {
+    const formData = new FormData();
+    formData.append("title", gameData.title);
+    formData.append("description", gameData.description || "");
+    formData.append("platforms", JSON.stringify(gameData.platforms || []));
+
+    if (gameData.imageFile) {
+      formData.append("image", gameData.imageFile);
+    }
+
+    const res = await axios.post(`${API_URL}/api/games`, formData, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return res.data;
@@ -41,7 +50,18 @@ export const createGame = async (gameData, token) => {
 
 export const updateGame = async (gameId, gameData, token) => {
   try {
-    const res = await axios.put(`${API_URL}/api/games/${gameId}`, gameData, {
+    const formData = new FormData();
+    formData.append("title", gameData.title);
+    formData.append("description", gameData.description || "");
+    formData.append("platforms", JSON.stringify(gameData.platforms || []));
+
+    if (gameData.imageFile) {
+      formData.append("image", gameData.imageFile);
+    } else if (gameData.image) {
+      formData.append("image", gameData.image);
+    }
+
+    const res = await axios.put(`${API_URL}/api/games/${gameId}`, formData, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return res.data;

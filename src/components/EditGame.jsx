@@ -10,6 +10,7 @@ function EditGame() {
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [description, setDescription] = useState("");
   const [platforms, setPlatforms] = useState([]);
   const [platformOptions, setPlatformOptions] = useState([]);
@@ -44,7 +45,7 @@ function EditGame() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const updatedGame = { title, image, description, platforms };
+    const updatedGame = { title, image, imageFile, description, platforms };
     const storedToken = localStorage.getItem("authToken");
 
     updateGame(gameId, updatedGame, storedToken)
@@ -56,7 +57,7 @@ function EditGame() {
 
   return (
     <div className="edit-game">
-      <h1 className="edit-game-title">Edit game</h1>
+      <h1 className="edit-game-title">Editar juego</h1>
 
       <form className="edit-game-form" onSubmit={handleSubmit}>
         <label className="edit-form-label">Título</label>
@@ -67,23 +68,24 @@ function EditGame() {
           placeholder="Título del juego"
         />
 
-        <label className="edit-form-label">URL de imagen</label>
+        <label className="edit-form-label">Imagen</label>
         <input
           className="edit-form-input"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          placeholder="URL de la imagen"
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImageFile(e.target.files?.[0] || null)}
         />
+        {image && <p className="edit-form-helper">Imagen actual: {image.split('/').pop()}</p>}
 
-        <label className="edit-form-label">Description</label>
+        <label className="edit-form-label">Descripción</label>
         <textarea
           className="edit-form-input"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
+          placeholder="Descripción"
         />
 
-        <label className="edit-form-label">Platforms</label>
+        <label className="edit-form-label">Plataformas</label>
         <div className="dropdown-container form-input">
           <div
             className="dropdown-header"
@@ -110,7 +112,7 @@ function EditGame() {
 
         <div className="edit-game-actions">
           <button className="edit-form-button" type="submit">
-            💾 Save changes
+            💾 Guardar cambios
           </button>
 
           <button
@@ -118,7 +120,7 @@ function EditGame() {
             type="button"
             onClick={() => navigate(-1)}
           >
-            Cancel
+            Cancelar
           </button>
         </div>
       </form>
