@@ -52,6 +52,8 @@ function CreateGame() {
 
   return (
     <form onSubmit={handleSubmit} className="create-game-form">
+      <h2 className="create-game-title">Creación de Juego</h2>
+      
       <label>Título</label>
       <input
         type="text"
