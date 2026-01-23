@@ -200,6 +200,82 @@
   color: #fff;
 }
 
+@media (max-width: 768px) {
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 18px 10px;
+  }
+
+  .review-date {
+    font-size: 0.8rem;
+  }
+
+  .rating-number {
+    top: 10px;
+    right: 12px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+
+  .review-content {
+    font-size: 0.92rem;
+    padding: 0 16px 14px;
+  }
+
+  .review-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-header {
+    padding: 10px 14px 8px 14px;
+    padding-right: 60px;
+  }
+
+  .review-author {
+    font-size: 0.98rem;
+  }
+
+  .rating-number {
+    width: 46px;
+    height: 46px;
+    font-size: 1.3rem;
+    top: 8px;
+    right: 10px;
+  }
+
+  .rating-stars {
+    padding: 0 14px;
+  }
+
+  .star {
+    font-size: 1.15rem;
+  }
+
+  .review-content {
+    padding: 0 14px 12px;
+    font-size: 0.88rem;
+  }
+
+  .review-actions {
+    padding: 0 14px 12px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .edit-button,
+  .delete-button,
+  .save-button,
+  .cancel-button {
+    width: 100%;
+    padding: 10px 14px;
+  }
+}
+}
+
 /* 🔹 Botón Create Review */
 .create-review-button {
   display: inline-block;

@@ -43,7 +43,6 @@ export const updateReview = async (reviewId, reviewData, token) => {
 export const createReview = async (gameId, reviewData, token) => {
   try {
     const payload = { ...reviewData };
-    console.log("Creating review with payload:", payload);
     const res = await axios.post(
       `${API_URL}/api/reviews/game/${gameId}`,
       payload,

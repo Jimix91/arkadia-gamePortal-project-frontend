@@ -25,7 +25,7 @@ nav {
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(10px);
-  overflow: hidden;
+  overflow: visible;
 }
 
 @keyframes navShimmer {
@@ -123,6 +123,46 @@ nav::before {
   gap: 12px;
   position: relative;
   z-index: 10;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 100%;
+  background: #e5edff;
+  border-radius: 4px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.is-open {
+  box-shadow: 0 8px 20px rgba(79, 209, 255, 0.35);
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 nav button {
@@ -233,4 +273,92 @@ nav button.btn-admin:hover {
   font-weight: 800;
   font-size: 0.9rem;
   box-shadow: 0 0 10px rgba(79, 209, 255, 0.4);
+}
+
+@media (max-width: 900px) {
+  nav {
+    flex-wrap: nowrap;
+    gap: 12px;
+    height: 60px;
+    padding: 8px 18px;
+  }
+
+  .app-logo {
+    height: 110px;
+    padding-top: 8px;
+  }
+
+  .app-title {
+    font-size: 1.4rem;
+  }
+
+  .nav-right {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  nav button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .user-name {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  nav {
+    padding: 6px 12px;
+    height: 54px;
+    flex-wrap: nowrap;
+  }
+
+  .app-logo {
+    height: 76px;
+    padding-top: 4px;
+  }
+
+  .nav-left {
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .hamburger {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .nav-right {
+    position: absolute;
+    top: 56px;
+    right: 8px;
+    left: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    background: rgba(15, 22, 42, 0.96);
+    border: 1px solid rgba(79, 209, 255, 0.3);
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.5),
+      0 0 18px rgba(79, 209, 255, 0.3);
+    backdrop-filter: blur(10px);
+    display: none;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    z-index: 999;
+  }
+
+  .nav-right.open {
+    display: flex;
+  }
+
+  nav button,
+  .user-name {
+    width: 100%;
+    justify-content: center;
+  }
 }
