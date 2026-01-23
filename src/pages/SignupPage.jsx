@@ -14,6 +14,7 @@ function SignupPage(props) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [showPassword, setShowPassword] = useState(false);
  
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext);
@@ -79,13 +80,47 @@ function SignupPage(props) {
         />
  
         <label>Contraseña:</label>
-        <input 
-          type="password"
-          name="password"
-          value={password}
-          autoComplete="new-password"
-          onChange={handlePassword}
-        />
+        <div className="password-field">
+          <input 
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={password}
+            autoComplete="new-password"
+            onChange={handlePassword}
+          />
+          <button
+            type="button"
+            className="toggle-password"
+            aria-label="Mantén presionado para mostrar la contraseña"
+            title="Mantén presionado para mostrar la contraseña"
+            onMouseDown={() => setShowPassword(true)}
+            onMouseUp={() => setShowPassword(false)}
+            onMouseLeave={() => setShowPassword(false)}
+            onTouchStart={() => setShowPassword(true)}
+            onTouchEnd={() => setShowPassword(false)}
+            onTouchCancel={() => setShowPassword(false)}
+            onKeyDown={(e) => {
+              if (e.key === " " || e.key === "Enter") {
+                e.preventDefault();
+                setShowPassword(true);
+              }
+            }}
+            onKeyUp={() => setShowPassword(false)}
+          >
+            {showPassword ? (
+              <svg className="eye-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+                <circle cx="12" cy="12" r="3.2" />
+              </svg>
+            ) : (
+              <svg className="eye-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+                <circle cx="12" cy="12" r="3.2" />
+                <path className="eye-slash" d="M4 4l16 16" />
+              </svg>
+            )}
+          </button>
+        </div>
  
         <label>Nombre:</label>
         <input 

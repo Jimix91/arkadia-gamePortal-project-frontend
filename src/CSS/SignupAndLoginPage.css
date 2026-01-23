@@ -138,3 +138,58 @@
     padding: 24px 20px;
   }
 }
+
+/* Campo de contraseña con botón de ojo */
+.LoginPage .password-field,
+.SignupPage .password-field {
+  position: relative;
+}
+
+.LoginPage .password-field input,
+.SignupPage .password-field input {
+  padding-right: 44px;
+}
+
+.LoginPage .password-field .toggle-password,
+.SignupPage .password-field .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #c9d5ff;
+  cursor: pointer;
+}
+
+.LoginPage .password-field .toggle-password:hover,
+.SignupPage .password-field .toggle-password:hover {
+  color: #4fd1ff;
+}
+
+.LoginPage .password-field .toggle-password:active,
+.SignupPage .password-field .toggle-password:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.LoginPage .password-field .eye-icon,
+.SignupPage .password-field .eye-icon {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.LoginPage .password-field .eye-slash,
+.SignupPage .password-field .eye-slash {
+  stroke: currentColor;
+  stroke-width: 2;
+  opacity: 0.95;
+}
