@@ -56,7 +56,7 @@ function EditGame() {
 
   return (
     <div className="edit-game">
-      <h1 className="edit-game-title">Editar juego</h1>
+      <h1 className="edit-game-title">Edit game</h1>
 
       <form className="edit-game-form" onSubmit={handleSubmit}>
         <label className="edit-form-label">Título</label>
@@ -75,15 +75,15 @@ function EditGame() {
           placeholder="URL de la imagen"
         />
 
-        <label className="edit-form-label">Descripción</label>
+        <label className="edit-form-label">Description</label>
         <textarea
           className="edit-form-input"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Descripción"
+          placeholder="Description"
         />
 
-        <label className="edit-form-label">Plataformas</label>
+        <label className="edit-form-label">Platforms</label>
         <div className="dropdown-container form-input">
           <div
             className="dropdown-header"
@@ -110,7 +110,7 @@ function EditGame() {
 
         <div className="edit-game-actions">
           <button className="edit-form-button" type="submit">
-            💾 Guardar cambios
+            💾 Save changes
           </button>
 
           <button
@@ -118,7 +118,7 @@ function EditGame() {
             type="button"
             onClick={() => navigate(-1)}
           >
-            Cancelar
+            Cancel
           </button>
         </div>
       </form>

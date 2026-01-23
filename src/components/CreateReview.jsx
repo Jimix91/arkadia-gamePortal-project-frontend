@@ -30,7 +30,7 @@ function CreateReview({ gameId, onReviewCreated }) {
     setLoading(true)
 
     if (!formData.content.trim()) {
-      setError("Por favor escribe una reseña")
+      setError("Please write a review")
       setLoading(false)
       return
     }
@@ -38,7 +38,7 @@ function CreateReview({ gameId, onReviewCreated }) {
     const storedToken = localStorage.getItem("authToken")
 
     if (!storedToken) {
-      setError("Necesitas iniciar sesión para crear una reseña")
+      setError("You need to log in to create a review")
       setLoading(false)
       return
     }
@@ -52,7 +52,7 @@ function CreateReview({ gameId, onReviewCreated }) {
       })
       .catch((err) => {
         console.error("Error creating review", err)
-        setError("No se pudo crear la reseña. Intenta de nuevo.")
+        setError("Could not create the review. Please try again.")
       })
       .finally(() => {
         setLoading(false)
@@ -69,7 +69,7 @@ function CreateReview({ gameId, onReviewCreated }) {
   if (!user) {
     return (
       <Link to="/login">
-        <button className="create-review-button">⭐ Crear reseña</button>
+        <button className="create-review-button">⭐ Write a review</button>
       </Link>
     )
   }
@@ -81,29 +81,29 @@ function CreateReview({ gameId, onReviewCreated }) {
           onClick={() => setShowForm(true)}
           className="create-review-button"
         >
-          ⭐ Crear reseña
+          ⭐ Write a review
         </button>
       ) : (
         <form onSubmit={handleSubmit} className="review-form">
-          <h4>Escribe tu reseña</h4>
+          <h4>Share your review</h4>
 
           {error && <p className="error-message">{error}</p>}
 
           <div className="form-group">
-            <label htmlFor="content">Tu reseña:</label>
+            <label htmlFor="content">Your review:</label>
             <textarea
               id="content"
               name="content"
               value={formData.content}
               onChange={handleInputChange}
-              placeholder="Comparte tus impresiones sobre este juego..."
+              placeholder="Share your thoughts on this game..."
               minLength={10}
               rows="4"
             />
           </div>
 
           <div className="form-group">
-            <label>Puntuación:</label>
+            <label>Rating:</label>
             <div className="star-rating">
               {[1, 2, 3, 4, 5].map((star) => (
                 <span
@@ -130,7 +130,7 @@ function CreateReview({ gameId, onReviewCreated }) {
               className="cancel-button"
               disabled={loading}
             >
-              Cancelar
+              Cancel
             </button>
           </div>
         </form>

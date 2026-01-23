@@ -57,7 +57,7 @@ function CreateGame() {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Ej: Super Mario"
+        placeholder="Por ejemplo, Super Mario"
         required
       />
 

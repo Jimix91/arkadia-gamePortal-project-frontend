@@ -6,11 +6,11 @@ function NotfoundPage() {
     <div className="notfound-page">
       <div className="notfound-card">
         <p className="eyebrow">404</p>
-        <h1>Zona no explorada</h1>
-        <p className="notfound-copy">No encontramos esta pantalla, pero el portal sigue abierto para descubrir juegos.</p>
+        <h1>Uncharted territory</h1>
+        <p className="notfound-copy">We couldn't find this screen, but the portal remains open to discover games.</p>
         <div className="notfound-actions">
-          <Link to="/" className="primary-btn">Volver al inicio</Link>
-          <Link to="/games" className="ghost-btn">Ver juegos</Link>
+          <Link to="/" className="primary-btn">Back to home</Link>
+          <Link to="/games" className="ghost-btn">View games</Link>
         </div>
       </div>
     </div>

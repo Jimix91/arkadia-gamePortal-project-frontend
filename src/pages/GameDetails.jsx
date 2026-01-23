@@ -117,7 +117,7 @@ function GameDetails() {
                 <p className="rating-caption">Puntaje de la comunidad</p>
               </>
             ) : (
-              <span className="no-rating">Sin valoraciones</span>
+              <span className="no-rating">No ratings yet</span>
             )}
           </div>
         </div>
@@ -152,10 +152,10 @@ function GameDetails() {
         {isLoggedIn && user?.role === "admin" && (
           <div className="game-actions">
             <NavLink to={`/games/edit/${gameId}`}>
-              <button className="edit-button">✏️ Editar juego</button>
+              <button className="edit-button">✏️ Edit game</button>
             </NavLink>
             <button onClick={handleDelete} className="delete-button">
-              🗑️ Borrar juego
+              🗑️ Delete game
             </button>
           </div>
         )}

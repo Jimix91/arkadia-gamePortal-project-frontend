@@ -21,7 +21,7 @@ function ReviewList({ gameId }) {
         setReviews(data)
       })
       .catch((err) => {
-        console.log("Error obteniendo la lista de reseñas", err)
+        console.log("Error getting the review list", err)
       })
   }
 
@@ -29,17 +29,17 @@ function ReviewList({ gameId }) {
     const storedToken = localStorage.getItem("authToken")
     
     if (!storedToken) {
-      console.log("Necesitas iniciar sesión para borrar una reseña")
+      console.log("You need to log in to delete a review")
       return
     }
 
-    if (window.confirm("¿Seguro que quieres borrar esta reseña?")) {
+    if (window.confirm("Are you sure you want to delete this review?")) {
       deleteReview(reviewId, storedToken)
         .then(() => {
           loadReviews()
         })
         .catch((err) => {
-          console.log("Error borrando la reseña", err)
+          console.log("Error deleting the review", err)
         })
     }
   }
@@ -58,7 +58,7 @@ function ReviewList({ gameId }) {
     const storedToken = localStorage.getItem("authToken")
     
     if (!storedToken) {
-      console.log("Necesitas iniciar sesión para actualizar una reseña")
+      console.log("You need to log in to update a review")
       return
     }
 
@@ -69,7 +69,7 @@ function ReviewList({ gameId }) {
         setEditData({ content: "", rating: 0 })
       })
       .catch((err) => {
-        console.log("Error actualizando la reseña", err)
+        console.log("Error updating the review", err)
       })
   }
 
@@ -108,10 +108,10 @@ function ReviewList({ gameId }) {
     </div>
 
     <button onClick={() => handleEditSave(review._id)} className="save-button">
-      Guardar
+      Save
     </button>
     <button onClick={handleEditCancel} className="cancel-button">
-      Cancelar
+      Cancel
     </button>
   </div>
 ) : (

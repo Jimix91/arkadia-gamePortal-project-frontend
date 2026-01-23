@@ -10,7 +10,7 @@ function AdminPanel() {
   const [error, setError] = useState(null)
   const [editingUserId, setEditingUserId] = useState(null)
   const [editingName, setEditingName] = useState("")
-  const [editingRole, setEditingRole] = useState("")
+  const [editingRolee, setEditingRolee] = useState("")
 
   const API_URL = import.meta.env.VITE_API_URL
   const token = localStorage.getItem("authToken")
@@ -29,14 +29,14 @@ function AdminPanel() {
       setError(null)
     } catch (err) {
       console.error("Error fetching users:", err)
-      setError("No se pudieron cargar los usuarios")
+      setError("Could not load users")
     } finally {
       setLoading(false)
     }
   }
 
   const handleDeleteUser = async (userId) => {
-    const confirmed = window.confirm("¿Estás seguro de que deseas eliminar este usuario?")
+    const confirmed = window.confirm("Are you sure you want to delete this user?")
     if (!confirmed) return
 
     try {
@@ -46,36 +46,36 @@ function AdminPanel() {
       setUsers(users.filter(u => u._id !== userId))
     } catch (err) {
       console.error("Error deleting user:", err)
-      setError("No se pudo eliminar el usuario")
+      setError("Could not delete the user")
     }
   }
 
   const handleEditUser = (userId, name, role) => {
     setEditingUserId(userId)
     setEditingName(name)
-    setEditingRole(role)
+    setEditingRolee(role)
   }
 
   const handleSaveUser = async (userId) => {
     try {
       const response = await axios.put(
         `${API_URL}/auth/admin/users/${userId}`,
-        { name: editingName, role: editingRole },
+        { name: editingName, role: editingRolee },
         { headers: { Authorization: `Bearer ${token}` } }
       )
       setUsers(users.map(u => u._id === userId ? response.data : u))
       setEditingUserId(null)
     } catch (err) {
       console.error("Error updating user:", err)
-      setError("No se pudo actualizar el usuario")
+      setError("Could not update the user")
     }
   }
 
   if (loading) {
     return (
       <div className="admin-panel">
-        <h1>Panel de Administración</h1>
-        <p>Cargando usuarios...</p>
+        <h1>Admin Panel</h1>
+        <p>Loading users...</p>
       </div>
     )
   }
@@ -83,7 +83,7 @@ function AdminPanel() {
   if (error) {
     return (
       <div className="admin-panel">
-        <h1>Panel de Administración</h1>
+        <h1>Admin Panel</h1>
         <p className="error">{error}</p>
       </div>
     )
@@ -92,7 +92,7 @@ function AdminPanel() {
   return (
     <div className="admin-panel">
       <header className="admin-header">
-        <h1>Panel de Administración</h1>
+        <h1>Admin Panel</h1>
         <p className="subtitle">Gestiona los usuarios registrados en Arkadia</p>
       </header>
 
@@ -100,10 +100,10 @@ function AdminPanel() {
         <table className="users-table">
           <thead>
             <tr>
-              <th>Nombre</th>
+              <th>Name</th>
               <th>Email</th>
-              <th>Rol</th>
-              <th>Acciones</th>
+              <th>Role</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -125,8 +125,8 @@ function AdminPanel() {
                 <td>
                   {editingUserId === u._id ? (
                     <select
-                      value={editingRole}
-                      onChange={(e) => setEditingRole(e.target.value)}
+                      value={editingRolee}
+                      onChange={(e) => setEditingRolee(e.target.value)}
                       className="edit-input"
                     >
                       <option value="user">Usuario</option>
@@ -145,13 +145,13 @@ function AdminPanel() {
                         onClick={() => handleSaveUser(u._id)}
                         className="btn-save"
                       >
-                        Guardar
+                        Save
                       </button>
                       <button
                         onClick={() => setEditingUserId(null)}
                         className="btn-cancel"
                       >
-                        Cancelar
+                        Cancel
                       </button>
                     </>
                   ) : (
@@ -160,13 +160,13 @@ function AdminPanel() {
                         onClick={() => handleEditUser(u._id, u.name, u.role)}
                         className="btn-edit"
                       >
-                        Editar
+                        Edit
                       </button>
                       <button
                         onClick={() => handleDeleteUser(u._id)}
                         className="btn-delete"
                       >
-                        Eliminar
+                        Delete
                       </button>
                     </>
                   )}
@@ -178,8 +178,8 @@ function AdminPanel() {
       </div>
 
       <div className="users-summary">
-        <p>Total de usuarios: <strong>{users.length}</strong></p>
-        <p>Administradores: <strong>{users.filter(u => u.role === "admin").length}</strong></p>
+        <p>Total users: <strong>{users.length}</strong></p>
+        <p>Administrators: <strong>{users.filter(u => u.role === "admin").length}</strong></p>
       </div>
     </div>
   )
