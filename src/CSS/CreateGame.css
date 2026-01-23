@@ -36,7 +36,7 @@
 
 .create-game-form input[type="text"],
 .create-game-form input[type="url"] {
-  width: 100%;
+  width: calc(100% - 28px);
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid rgba(79, 209, 255, 0.24);
@@ -45,6 +45,7 @@
   font-size: 0.98rem;
   transition: border 0.2s, background-color 0.2s, box-shadow 0.2s;
   box-shadow: inset 0 0 10px rgba(79, 209, 255, 0.1);
+  box-sizing: border-box;
 }
 
 .create-game-form input[type="text"]:focus,
