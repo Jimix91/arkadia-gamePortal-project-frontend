@@ -26,8 +26,11 @@ function Navbar() {
             {user?.role === "admin" && (
               <Link to="/games/create"><button>Crear</button></Link>
             )}
+            <Link to="/profile" className="user-name">
+              <span className="user-initial">{user?.name?.[0] || "U"}</span>
+              <span>{user?.name}</span>
+            </Link>
             <button onClick={logOutUser}>Salir</button>
-            {user && <span className="user-name">{user.name}</span>}
           </>
         )}
 

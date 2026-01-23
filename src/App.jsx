@@ -14,6 +14,7 @@ import AboutPage from "./pages/AboutPage"
 import FilteredGamesPage from "./pages/FilteredGamesPage"
 import AdminPanel from "./pages/AdminPanel"
 import Footer from "./components/Footer"
+import UserProfile from "./pages/UserProfile"
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/games" element={<FilteredGamesPage />} />
         <Route path="/games/:gameId" element={<GameDetails />} />
         <Route path="/games/edit/:gameId" element={ <IsPrivate> <EditGame />  </IsPrivate>  }/>
+        <Route path="/profile" element={<IsPrivate><UserProfile /></IsPrivate>} />
         <Route path="/signup" element={ <IsAnon> <SignupPage /> </IsAnon> } />
         <Route path="/login" element={ <IsAnon> <LoginPage />  </IsAnon> } />
       </Routes>

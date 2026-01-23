@@ -46,6 +46,13 @@
   align-items: flex-start;
 }
 
+.top-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
 .meta-row {
   display: flex;
   align-items: center;
@@ -126,6 +133,33 @@
   border: 1px solid rgba(79, 209, 255, 0.3);
   text-align: center;
   box-shadow: 0 0 14px rgba(79, 209, 255, 0.25);
+}
+
+.favorite-toggle {
+  min-width: 180px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #dfe4ff;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.favorite-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(79, 209, 255, 0.3);
+}
+
+.favorite-toggle.is-active {
+  background: linear-gradient(135deg, #ff8fa3, #ff4fd8);
+  color: #0b0c1a;
+  border-color: transparent;
+  box-shadow:
+    0 0 14px rgba(255, 79, 216, 0.65),
+    0 0 14px rgba(255, 143, 163, 0.45);
 }
 
 .rating-pill .rating-number {
@@ -287,6 +321,10 @@
 
   .rating-pill {
     width: 100%;
+  }
+
+  .top-actions {
+    align-items: stretch;
   }
 }
 

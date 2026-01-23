@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
-import { NavLink, useSearchParams } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { NavLink, useSearchParams, useNavigate } from "react-router-dom"
 import { getAllGames } from "../services/games.service"
+import { AuthContext } from "../context/auth.context"
 import "../CSS/GameList.css"
 
 function GameList({ minRating = 0 }) {
@@ -8,6 +9,8 @@ function GameList({ minRating = 0 }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const platformFilter = searchParams.get("platform") || ""
   const searchQuery = searchParams.get("search") || ""
+  const { isLoggedIn, favorites, toggleFavorite } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getAllGames(platformFilter)
@@ -39,6 +42,18 @@ function GameList({ minRating = 0 }) {
     setSearchParams({})
   }
 
+  const handleFavoriteClick = async (gameId, event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    if (!isLoggedIn) {
+      navigate("/login")
+      return
+    }
+
+    await toggleFavorite(gameId)
+  }
+
   return (
     <div className="game-list">
       {(platformFilter || searchQuery) && (
@@ -53,6 +68,13 @@ function GameList({ minRating = 0 }) {
       )}
       {games.map((game) => (
         <div key={game._id} className="game-card">
+          <button
+            className={`favorite-btn ${favorites.includes(game._id) ? "is-active" : ""}`}
+            onClick={(event) => handleFavoriteClick(game._id, event)}
+            aria-label={favorites.includes(game._id) ? "Quitar de favoritos" : "Añadir a favoritos"}
+          >
+            {favorites.includes(game._id) ? "♥" : "♡"}
+          </button>
           {game.image && <img src={game.image} alt={game.title} />}
           <div className="game-card-content">
             <h3>{game.title}</h3>

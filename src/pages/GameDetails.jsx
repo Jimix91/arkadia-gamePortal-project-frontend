@@ -9,7 +9,7 @@ import CreateReview from "../components/CreateReview"
 function GameDetails() {
   const { gameId } = useParams()
   const navigate = useNavigate()
-  const { isLoggedIn, user } = useContext(AuthContext)
+  const { isLoggedIn, user, favorites, toggleFavorite } = useContext(AuthContext)
   const [game, setGame] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -50,6 +50,15 @@ function GameDetails() {
   const handleReviewCreated = () => {
     setRefreshKey((prev) => prev + 1)
     fetchGame()
+  }
+
+  const handleFavorite = async () => {
+    if (!isLoggedIn) {
+      navigate("/login")
+      return
+    }
+
+    await toggleFavorite(gameId)
   }
 
   if (loading) {
@@ -96,29 +105,38 @@ function GameDetails() {
             </div>
           </div>
 
-          <div className="rating-pill">
-            {game.averageRating ? (
-              <>
-                <div className="rating-number">{game.averageRating.toFixed(1)}</div>
-                <div className="stars">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span
-                      key={star}
-                      className={
-                        star <= Math.round(game.averageRating)
-                          ? "star filled"
-                          : "star"
-                      }
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <p className="rating-caption">Puntaje de la comunidad</p>
-              </>
-            ) : (
-              <span className="no-rating">No ratings yet</span>
-            )}
+          <div className="top-actions">
+            <div className="rating-pill">
+              {game.averageRating ? (
+                <>
+                  <div className="rating-number">{game.averageRating.toFixed(1)}</div>
+                  <div className="stars">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span
+                        key={star}
+                        className={
+                          star <= Math.round(game.averageRating)
+                            ? "star filled"
+                            : "star"
+                        }
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <p className="rating-caption">Puntaje de la comunidad</p>
+                </>
+              ) : (
+                <span className="no-rating">No ratings yet</span>
+              )}
+            </div>
+
+            <button
+              className={`favorite-toggle ${favorites.includes(game._id) ? "is-active" : ""}`}
+              onClick={handleFavorite}
+            >
+              {favorites.includes(game._id) ? "♥ En favoritos" : "♡ Guardar"}
+            </button>
           </div>
         </div>
 

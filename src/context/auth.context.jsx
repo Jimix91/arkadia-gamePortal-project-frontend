@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  getMyProfile,
+  addFavoriteGame,
+  removeFavoriteGame,
+} from "../services/user.service";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -9,43 +14,62 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [favorites, setFavorites] = useState([]);
   
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
   }  
     
-  const authenticateUser = () => { 
-    // Get the stored token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-    
-    // If the token exists in the localStorage
-    if (storedToken) {
-      // We must send the JWT token in the request's "Authorization" Headers
-      axios.get(
-        `${API_URL}/auth/verify`, 
-        { headers: { Authorization: `Bearer ${storedToken}`} }
-      )
-      .then((response) => {
-        // If the server verifies that JWT token is valid
-        const user = response.data;      
-        setIsLoggedIn(true);
-        setIsLoading(false);
-        setUser(user);
-      })
-      .catch((error) => {
-        // If the server sends an error response (invalid token)    
-        setIsLoggedIn(false);
-        setIsLoading(false);
-        setUser(null);
-      });
-
-    } else {
-      // If the token is not available
-      setIsLoggedIn(false);
-      setIsLoading(false);
-      setUser(null);
+  const fetchProfile = async (token) => {
+    const safeToken = token || localStorage.getItem("authToken");
+    if (!safeToken) {
+      setProfile(null);
+      setFavorites([]);
+      return;
     }
-  }
+
+    try {
+      const profileData = await getMyProfile(safeToken);
+      setProfile(profileData);
+      setFavorites((profileData.favorites || []).map((game) => game._id));
+    } catch (err) {
+      console.error("Error loading profile", err);
+      setProfile(null);
+      setFavorites([]);
+    }
+  };
+
+  const authenticateUser = async () => { 
+    const storedToken = localStorage.getItem("authToken");
+    if (!storedToken) {
+      setIsLoggedIn(false);
+      setUser(null);
+      setProfile(null);
+      setFavorites([]);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const response = await axios.get(
+        `${API_URL}/auth/verify`,
+        { headers: { Authorization: `Bearer ${storedToken}`} }
+      );
+
+      setIsLoggedIn(true);
+      setUser(response.data);
+      await fetchProfile(storedToken);
+    } catch (error) {
+      setIsLoggedIn(false);
+      setUser(null);
+      setProfile(null);
+      setFavorites([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const removeToken = () => {
     // Upon logout, remove the token from the localStorage
@@ -54,8 +78,33 @@ function AuthProviderWrapper(props) {
   
   const logOutUser = () => {
     removeToken();
+    setProfile(null);
+    setFavorites([]);
     authenticateUser();
   }    
+
+  const toggleFavorite = async (gameId) => {
+    const storedToken = localStorage.getItem("authToken");
+    if (!storedToken) {
+      return { success: false, reason: "auth" };
+    }
+
+    const isFavorite = favorites.includes(gameId);
+
+    try {
+      if (isFavorite) {
+        await removeFavoriteGame(gameId, storedToken);
+      } else {
+        await addFavoriteGame(gameId, storedToken);
+      }
+
+      await fetchProfile(storedToken);
+      return { success: true };
+    } catch (err) {
+      console.error("Error toggling favorite", err);
+      return { success: false, reason: "server" };
+    }
+  };
 
 
   useEffect(() => {
@@ -66,7 +115,18 @@ function AuthProviderWrapper(props) {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser }}
+      value={{
+        isLoggedIn,
+        isLoading,
+        user,
+        profile,
+        favorites,
+        storeToken,
+        authenticateUser,
+        logOutUser,
+        fetchProfile,
+        toggleFavorite,
+      }}
     >
       {props.children}
     </AuthContext.Provider>
